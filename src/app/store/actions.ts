@@ -6,7 +6,7 @@ import { FlashMessage } from "./model";
  */
 export const loadChildAccountAction = createAction("[loadChildAccountAction] load Child Account Action", props<{ parentId: string, childAccountId: string }>());
 export const loadChildAccountSuccessAction = createAction("[loadChildAccountSuccessAction] load Child Account Success Action");
-export const loadChildAccountFailedAction = createAction("[loadChildAccountSuccessAction] load Child Account Success Action");
+export const loadChildAccountFailedAction = createAction("[loadChildAccountFailedAction] load Child Account Failed Action");
 
 /**
  * Flash Message

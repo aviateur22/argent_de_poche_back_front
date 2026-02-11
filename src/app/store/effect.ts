@@ -3,15 +3,13 @@ import { Actions, createEffect, ofType } from "@ngrx/effects"
 import { MessageService } from "primeng/api";
 import * as actions from "./actions";
 import { from, mergeMap, tap, of, catchError } from "rxjs";
-import { ChildMoneyService } from "../services/child-money.service";
-import { Router } from "@angular/router";
-import pageUrl from "../../misc/page-url";
+import { ChildMoneyAccountService } from "../services/child-money-account.service";
+
 export class Effect {
 
   private _actions$ = inject(Actions);
   private _messageService = inject(MessageService);
-  private _childMoneyService = inject(ChildMoneyService);
-  private _router = inject(Router);
+  private _childMoneyService = inject(ChildMoneyAccountService);
 
 /**
  * Child Money

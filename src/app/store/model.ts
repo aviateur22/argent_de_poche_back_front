@@ -2,6 +2,7 @@
  * Objet compte d'argent de poche d'un enfant
  */
 export interface ChildMoney {
+  childMoneyAccountId: string;
   childImageName: string;
   childName: string;
   remainingMoney: number;
@@ -9,6 +10,7 @@ export interface ChildMoney {
   periodName: string;
   startPeriodDate: Date | undefined;
   endPeriodDate: Date | undefined;
+  actualDate: Date | undefined;
 }
 
 /**
