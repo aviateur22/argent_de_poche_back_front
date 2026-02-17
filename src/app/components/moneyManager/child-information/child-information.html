@@ -1,1 +1,14 @@
-<p>child-information works!</p>
+<div>
+  <div>
+    <div class="w-full flex flex-column justify-content-center p-5">
+      <img
+        (click)="redirectToManageChild()"
+        [src]="imageUrl$ | async"
+        alt="">
+      <div class="w-full text-center flex flex-column align-content-center">
+        <p class="p-2">{{ childMoneyAccount.childName | capitalize }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,7 +1,9 @@
+import { ReasonMovementDto } from "../models/child-money.dto";
+
 /**
  * Objet compte d'argent de poche d'un enfant
  */
-export interface ChildMoney {
+export interface ChildMoneyAccount {
   childMoneyAccountId: string;
   childImageName: string;
   childName: string;
@@ -11,6 +13,11 @@ export interface ChildMoney {
   startPeriodDate: Date | undefined;
   endPeriodDate: Date | undefined;
   actualDate: Date | undefined;
+  availableReasonMovements : ReasonMovement[]
+}
+
+export interface ReasonMovement extends ReasonMovementDto {
+
 }
 
 /**

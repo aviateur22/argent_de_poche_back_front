@@ -1,3 +1,32 @@
 <app-main-container>
-  <p>test</p>
+  <!-- wrapper contenant les données de childMoneyAccount -->
+  <app-child-account-wrapper>
+    <ng-template let-childMoneyAccount>
+      <div class="flex flex-column align-items-center">
+        <!-- Date du jour -->
+        <app-actual-date [childMoneyAccount]=childMoneyAccount></app-actual-date>
+
+        <!-- Information enfant -->
+        <app-child-information [childMoneyAccount]=childMoneyAccount></app-child-information>
+
+        <!-- La semaine -->
+        <app-week-information [childMoneyAccount]=childMoneyAccount></app-week-information>
+
+        <!-- Argent de poche-->
+        <app-remaminig-money [childMoneyAccount]=childMoneyAccount></app-remaminig-money>
+
+        <!-- Rasion des mouvement d'argent de poche disponible -->
+        <div class="w-full max-w-30rem flex justify-content-center">
+          <div class="flex flex-wrap gap-2 justify-content-center">
+            @for (reasonMovement of childMoneyAccount.availableReasonMovements; track $index) {
+              <app-money-mouvement
+              class="p-3 w-5 shadow-1" [reasonMovement]=reasonMovement>
+            </app-money-mouvement>
+            }
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </app-child-account-wrapper>
 </app-main-container>
+

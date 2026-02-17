@@ -9,6 +9,10 @@ export default {
     url: 'compte/enfant/:childAccountId/detail',
     title:  `${environment.main_page_title} | Argent de poche`
   },
+  manageAccount: {
+    url: 'compte/modification',
+    title:  `${environment.main_page_title} | Modification`
+  },
   login: {
     url: 'auth/connexion',
     title:  `${environment.main_page_title} | Connexion`

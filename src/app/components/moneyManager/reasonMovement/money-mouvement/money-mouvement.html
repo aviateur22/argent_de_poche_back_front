@@ -1,0 +1,8 @@
+<!--Composant permattant de gérer l'argent de poche -->
+<div class="w-full flex h-6rem h-full flex-column align-items-center justify-content-between">
+  <p class="p-2 w-full text-center">{{ reasonMovement.reasonName}}</p>
+  <div class="w-7rem flex justify-content-between md:w-full">
+    <app-reason-button [reasonCode]=reasonMovement.reasonCode [actionCode]=reasonMovement.addMoneyActionCode></app-reason-button>
+    <app-reason-button [reasonCode]=reasonMovement.reasonCode [actionCode]=reasonMovement.removeMoneyActionCode></app-reason-button>
+  </div>
+</div>

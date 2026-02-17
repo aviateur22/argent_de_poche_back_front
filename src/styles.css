@@ -9,3 +9,7 @@ src: url('./../public/font/Raleway.ttf');
   box-sizing: border-box;
   font-family: 'raleway', 'arial', sans-serif;
 }
+
+.m-width-1024 {
+  max-width: 1024px;
+}

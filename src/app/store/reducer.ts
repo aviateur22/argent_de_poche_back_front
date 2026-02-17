@@ -3,7 +3,7 @@ import { ApplicationState } from "./state";
 import * as actions from "./actions";
 
 export const initialState: ApplicationState = {
-  childMoney: {
+  childMoneyAccount: {
     childImageName: "",
     childName: "",
     remainingMoney: 0,
@@ -13,6 +13,7 @@ export const initialState: ApplicationState = {
     endPeriodDate: undefined,
     actualDate: undefined,
     childMoneyAccountId: "",
+    availableReasonMovements: []
   },
   flashMessage: {
     title: "",
@@ -33,10 +34,46 @@ export const applicationReducers  = createReducer(
       isSuccess: false
     }
   })),
-  on(actions.loadChildAccountSuccessAction, state => ({
+  on(actions.refreshChildAccountAction, state =>({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.updateChildNameAction, state =>({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.updateInitialStartMoneyAction, state =>({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+    on(actions.reinitializeRemainingMoneyAction, state =>({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.loadChildAccountSuccessAction, (state, {childAccountMoneyDto}) => ({
     ...state, requestStatus: {
       isLoading: false,
       isSuccess: true
+    },
+    childMoneyAccount: {
+      actualDate: childAccountMoneyDto.actualDate,
+      childMoneyAccountId: childAccountMoneyDto.childAccountIdentity,
+      childImageName: childAccountMoneyDto.imageRandomName,
+      childName: childAccountMoneyDto.childName,
+      remainingMoney: childAccountMoneyDto.remainingMoney,
+      moneyAtPeriodStart: childAccountMoneyDto.moneyAtPeriodStart,
+      periodName: childAccountMoneyDto.periodName,
+      startPeriodDate: childAccountMoneyDto.startPeriodDate,
+      endPeriodDate: childAccountMoneyDto.endPeriodDate,
+      availableReasonMovements: childAccountMoneyDto.availableMovementReasonDtos
     }
   })),
   on(actions.loadChildAccountFailedAction, state => ({
@@ -44,7 +81,41 @@ export const applicationReducers  = createReducer(
       isLoading: false,
       isSuccess: false
     }
-  }))
-
-
+  })),
+  on(actions.updateChildNameFailedAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+  on(actions.updateInitialStartMoneyFailedAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+  on(actions.reinitializeRemainingMoneyFailedAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+  on(actions.refreshChildAccountSuccessAction, (state, {childAccountMoneyDto}) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    },
+    childMoneyAccount: {
+      ...state.childMoneyAccount,
+      childImageName: childAccountMoneyDto.imageRandomName,
+      remainingMoney: childAccountMoneyDto.remainingMoney,
+      moneyAtPeriodStart: childAccountMoneyDto.moneyAtPeriodStart
+    }
+  })),
+   on(actions.refreshChildAccountFailedAction, (state) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
 )

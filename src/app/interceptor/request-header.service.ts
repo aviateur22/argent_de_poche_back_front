@@ -10,6 +10,9 @@ export class RequestHeaderService {
   constructor() { }
 
   public addHeaders(request: HttpRequest<unknown>): HttpRequest<unknown> {
+
+    // Url applé pour streamer un image
+    const streamUrl = '/stream/image/';
     let copyRequest = request;
 
     // Ajout du header Authorisation
@@ -17,8 +20,13 @@ export class RequestHeaderService {
       copyRequest = this.addAuthorizationHeader(copyRequest);
 
 
+    // Ajout du token CSRF
     if(this.requiresCsrf(request.method))
       copyRequest = this.addCsrfToken(copyRequest);
+
+    // Ajout responseType blob
+    if(request.url.includes(streamUrl))
+      copyRequest = this.addBlobResponseType(copyRequest);
 
     // Ajout du content type
     if (request.body instanceof FormData)
@@ -82,6 +90,13 @@ export class RequestHeaderService {
         setHeaders: {
           'Content-Type': 'application/json'
       }
+    });
+  }
+
+  private addBlobResponseType(request: HttpRequest<unknown>): HttpRequest<unknown>  {
+      return request.clone({
+        responseType:'blob',
+        withCredentials: true
     });
   }
 

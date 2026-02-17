@@ -1,0 +1,13 @@
+<!-- Wrapper sur les composants du compte d'argent de poche -->
+<div>
+   @if ((childMoneyAccount$ | async); as childMoneyAccount) {
+    <ng-container *ngTemplateOutlet="contentTpl; context: { $implicit: childMoneyAccount }">
+    </ng-container>
+  }
+  <!-- Composant durant le chargement des données -->
+  @else {
+    <ng-container>
+      <p>Chargement</p>
+    </ng-container>
+  }
+</div>

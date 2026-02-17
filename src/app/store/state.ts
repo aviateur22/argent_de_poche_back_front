@@ -1,7 +1,7 @@
-import { ChildMoney, FlashMessage, RequestStatus } from "./model";
+import { ChildMoneyAccount, FlashMessage, RequestStatus } from "./model";
 
 export interface ApplicationState {
-  childMoney: ChildMoney,
+  childMoneyAccount: ChildMoneyAccount,
   flashMessage: FlashMessage,
   requestStatus: RequestStatus
 }

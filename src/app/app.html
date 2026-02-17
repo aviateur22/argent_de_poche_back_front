@@ -1,6 +1,13 @@
-
+<!--Overlay de chargement -->
+<app-loading-overlay></app-loading-overlay>
 
 <!--Message flash-->
-<p-toast />
+<p-toast
+  position="top-right"
+    [breakpoints]="{
+        '960px': { width: '75vw' },
+        '640px': { width: '95vw' }
+    }">
+></p-toast>
 
-<router-outlet />
+<router-outlet></router-outlet>
