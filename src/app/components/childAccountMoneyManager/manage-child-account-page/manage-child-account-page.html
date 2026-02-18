@@ -1,0 +1,24 @@
+<!-- Confirm dialog -->
+<p-confirmdialog />
+
+<app-main-container>
+
+  <div class="p-5">
+    <!--Titre-->
+    <header class="pb-6 flex w-full justify-content-center">
+      <h2 class="text-center">Modification de l'image du compte</h2>
+    </header>
+
+    <!-- Modification de l'image -->
+    <app-manager-child-image [parentId]="parentId" [childMoneyAccount]="childMoneyAccount" title="Modification de l'image du compte"></app-manager-child-image>
+
+    <!-- Modification du nom de l'enfant -->
+    <app-manager-child-name [parentId]="parentId" [childMoneyAccount]="childMoneyAccount" title="Modification de prénom de l'enfant"></app-manager-child-name>
+
+    <!-- Modification argent de poche initial-->
+    <app-manager-initial-money [parentId]="parentId" [childMoneyAccount]="childMoneyAccount" title="Modification de l'argent de poche initial"></app-manager-initial-money>
+
+    <!-- Reinitilasation argent de poche restant-->
+    <app-manager-remaining-money [parentId]="parentId" [childMoneyAccount]="childMoneyAccount"  title="Reinitialisation argent de poche restant"></app-manager-remaining-money>
+  </div>
+</app-main-container>

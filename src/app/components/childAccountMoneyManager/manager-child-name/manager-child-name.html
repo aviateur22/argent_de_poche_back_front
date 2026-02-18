@@ -1,0 +1,7 @@
+<app-manager-component-container [title]="title">
+    <div class="p-2">
+      <input [(ngModel)]="newChildName" type="text" pInputText fluid/>
+    </div>
+
+    <p-button fluid (onClick)="updateChildName()" [disabled]="newChildName === undefined || newChildName === ''" severity="info">Metttre à jour</p-button>
+</app-manager-component-container>
