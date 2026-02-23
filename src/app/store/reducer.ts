@@ -23,36 +23,86 @@ export const initialState: ApplicationState = {
   requestStatus: {
     isLoading: false,
     isSuccess: false
+  },
+  familyAccount: {
+    familyName: "",
+    childAccounts: []
   }
 }
 
 export const applicationReducers  = createReducer(
   initialState,
-  on(actions.loadChildAccountAction, state =>({
+  on(actions.loadFamilyAccountAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
       isSuccess: false
     }
   })),
-  on(actions.refreshChildAccountAction, state =>({
+  on(actions.loadFamilyAccountSuccessAction, (state, { childAccounts, familyName }) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    },
+    familyAccount: {
+      familyName: familyName,
+      childAccounts: childAccounts
+    }
+  })),
+  on(actions.loadFamilyAccountFailedAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+  on(actions.createFamilyAccountAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
       isSuccess: false
     }
   })),
-  on(actions.updateChildNameAction, state =>({
+  on(actions.createFamilyAccountSuccessAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    }
+  })),
+  on(actions.createFamilyAccounFailedAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+  on(actions.loadChildAccountAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
       isSuccess: false
     }
   })),
-  on(actions.updateInitialStartMoneyAction, state =>({
+  on(actions.refreshChildAccountAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
       isSuccess: false
     }
   })),
-    on(actions.reinitializeRemainingMoneyAction, state =>({
+  on(actions.updateChildNameAction, state => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.updateInitialStartMoneyAction, state => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.updateChildImageAction, state => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+    on(actions.reinitializeRemainingMoneyAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
       isSuccess: false
@@ -113,6 +163,24 @@ export const applicationReducers  = createReducer(
     }
   })),
    on(actions.refreshChildAccountFailedAction, (state) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+  on(actions.createChildAccountAction, state => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.createChildAccountSuccessAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    }
+  })),
+  on(actions.createChildFailedAction, state => ({
     ...state, requestStatus: {
       isLoading: false,
       isSuccess: false

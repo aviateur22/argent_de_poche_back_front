@@ -62,3 +62,18 @@ export interface UpdatedChildNameDto {
   childAccountId: string,
   updateChildName: string
 }
+
+/**
+ * Dto pour la création d'un compte d'argent de poche
+ */
+export interface CreateChildAccountDto {
+  parentId: string,
+  childName: string
+}
+
+/**
+ * Dto dpour la réponse de création d'un compte
+ */
+export interface CreatedChildAccountIdDto {
+  createdChildAccountId: string
+}

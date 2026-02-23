@@ -1,4 +1,4 @@
-<app-main-container>
+<app-main-container class="flex w-full">
   <!-- wrapper contenant les données de childMoneyAccount -->
   <app-child-account-wrapper>
     <ng-template let-childMoneyAccount>
@@ -6,7 +6,7 @@
         <!-- Date du jour -->
         <app-actual-date [childMoneyAccount]=childMoneyAccount></app-actual-date>
 
-        <!-- Information enfant -->
+        <!-- Information nom + photo de l'enfant -->
         <app-child-information [childMoneyAccount]=childMoneyAccount></app-child-information>
 
         <!-- La semaine -->

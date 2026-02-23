@@ -6,7 +6,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import * as actions from '../../../store/actions';
 import { ParentService } from '../../../services/parent.service';
 import { Store } from '@ngrx/store';
 import { ManagerChildName } from "../manager-child-name/manager-child-name";
@@ -30,6 +29,7 @@ export class ManageChildAccountPage implements OnInit {
    * Ces données sont récupérées depuis le state de l'application
   */
   childMoneyAccount!: ChildMoneyAccount
+  childImageurl!: string
 
   /**
    * L'identifiant du parent
@@ -40,25 +40,11 @@ export class ManageChildAccountPage implements OnInit {
       // Récupération des données du compte d'argent
       this.childMoneyAccount = history.state.childMoneyAccount;
 
+      // Récupération de l'image du compte
+      this.childImageurl = history.state.childImageurl;
+
       // Récupération de l'identifiant du parent
-      this.parentId = this.getParentId();
-  }
-
-  /**
-   * Récupération du parent
-   */
-  getParentId(): string {
-    const parentAuth = this._parentService.getAuthenticatedParent();
-
-    if(parentAuth === null) {
-      this._store.dispatch(actions.displayMessageAction({ message: {
-        isError: true,
-        title: '',
-        message: 'Echec récupération récupération identification parent'
-      } }));
-      throw new Error('Impossible de récupérer l\'identifiant du prant');
-    }
-    return parentAuth.parentId;
+      this.parentId = this._parentService.getParentId();
   }
 
 }

@@ -1,0 +1,17 @@
+<!-- Confirm dialog -->
+<p-confirmdialog />
+
+<app-main-container>
+
+  <div class="p-5">
+    <!--Titre-->
+    <header class="pb-6 flex w-full justify-content-center">
+      <h2 class="text-center">Création d'un compte d'argent de poche</h2>
+    </header>
+
+    <!-- Création du nom -->
+    <app-create-child-name [(childName)]="childName"></app-create-child-name>
+
+    <p-button fluid (onClick)="createChildAccount()" [disabled]="!childName" severity="info">Créer un compte</p-button>
+  </div>
+</app-main-container>

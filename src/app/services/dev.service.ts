@@ -6,6 +6,10 @@ import { Parent } from "../models/parent.model";
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Service permettant d'inject un parent fictif lors dquand le mode dev activé
+ * Ce service est appelé automatiquement au démarrage d'un projet Anagular
+ */
 export class DevService {
 
   private _parenService = inject(ParentService);

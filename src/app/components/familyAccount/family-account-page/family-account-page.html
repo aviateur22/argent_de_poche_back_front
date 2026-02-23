@@ -1,0 +1,15 @@
+<app-main-container class="flex w-full">
+  <app-family-wrapper>
+    <ng-template let-familyAccount>
+      <!-- Données sur la famille-->
+      <app-family-detail [familyAccount]="familyAccount"></app-family-detail>
+
+      <!-- Comptes d'argents de poche de la famille -->
+      <div class="flex flex-wrap gap-3">
+        @for (childAccount of familyAccount.childAccounts; track $index) {
+          <app-family-child-account [parentId]="parentId"  [childAccount]="childAccount"></app-family-child-account>
+        }
+      </div>
+    </ng-template>
+  </app-family-wrapper>
+</app-main-container>

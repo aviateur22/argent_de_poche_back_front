@@ -4,16 +4,54 @@ import { MessageService } from "primeng/api";
 import * as actions from "./actions";
 import { from, mergeMap, tap, of, catchError } from "rxjs";
 import { ChildMoneyAccountService } from "../services/child-money-account.service";
+import { FamilyAccountService } from "../services/family-account.service";
 
 export class Effect {
 
   private _actions$ = inject(Actions);
   private _messageService = inject(MessageService);
   private _childMoneyService = inject(ChildMoneyAccountService);
+  private _familyAccountService = inject(FamilyAccountService);
 
-/**
- * Load Child Money
- */
+
+  /**
+   * Création d'un compte d'argent de poche
+   */
+  createChildAccount$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(actions.createChildAccountAction),
+      mergeMap(({ createChildAccountDto }) =>
+        this._childMoneyService.createChildMoneyAccount(createChildAccountDto).pipe(
+          mergeMap(createdChildAccount => from([
+             actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: false,
+                  message: "Le compte a été créé"
+                }
+                }),
+              actions.refreshChildAccountAction({childAccountId: createdChildAccount.createdChildAccountId , parentId: createChildAccountDto.parentId })
+          ])),
+            catchError(error =>
+            of(
+              actions.refreshChildAccountFailedAction(),
+              actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: true,
+                  message: error.message
+                }
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  /**
+   * Load Child Money
+   */
   loadChildAccount$ = createEffect(() =>
     this._actions$.pipe(
       ofType(actions.loadChildAccountAction),
@@ -203,6 +241,111 @@ export class Effect {
             catchError(error =>
             of(
               actions.refreshChildAccountFailedAction(),
+              actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: true,
+                  message: error.message
+                }
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  /**
+   * Mise à jour de l'image
+   */
+  updateChildmage$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(actions.updateChildImageAction),
+      mergeMap(({ updateChildImageDto }) =>
+        this._childMoneyService.updateChildImage(updateChildImageDto).pipe(
+          mergeMap(updatedChildAccount => from([
+             actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: false,
+                  message: "L'image est mise à jour"
+                }
+                }),
+              actions.refreshChildAccountAction({childAccountId: updatedChildAccount.childAccountId , parentId: updateChildImageDto.get("parentId")! as string })
+          ])),
+            catchError(error =>
+            of(
+              actions.refreshChildAccountFailedAction(),
+              actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: true,
+                  message: error.message
+                }
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  /**
+   * Chargement d'une famille
+   */
+  loadFamilyAccount$ = createEffect(() =>
+       this._actions$.pipe(
+      ofType(actions.loadFamilyAccountAction),
+      mergeMap(({ loadFamilyAccountDto }) =>
+        this._familyAccountService.loadFamilyAccount(loadFamilyAccountDto).pipe(
+          mergeMap(response => from([
+             actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: false,
+                  message: "Les comptes de la famille"
+                }
+                }),
+              actions.loadFamilyAccountSuccessAction({ familyName: response.familyName, childAccounts: response.childs })
+          ])),
+            catchError(error =>
+            of(
+              actions.loadFamilyAccountFailedAction(),
+              actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: true,
+                  message: error.message
+                }
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  /**
+   * Creation d'un nouveau compte familiale
+   */
+  createFamilyAccount$ = createEffect(() =>
+       this._actions$.pipe(
+      ofType(actions.createFamilyAccountAction),
+      mergeMap(({ createFamilyAccountDto }) =>
+        this._familyAccountService.createFamilyAccount(createFamilyAccountDto).pipe(
+          mergeMap(response => from([
+             actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: false,
+                  message: "Le nouveau compte familiale a été créé"
+                }
+                }),
+              actions.createFamilyAccountSuccessAction()
+          ])),
+            catchError(error =>
+            of(
+              actions.createFamilyAccounFailedAction(),
               actions.displayMessageAction({
                 message: {
                   title: "",

@@ -1,0 +1,10 @@
+.image--wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.image {
+  border-radius: 50%;
+  object-fit: cover;
+}

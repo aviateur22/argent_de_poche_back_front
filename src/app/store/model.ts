@@ -1,4 +1,13 @@
 import { ReasonMovementDto } from "../models/child-money.dto";
+import { FamilyChildAccountDto } from "../models/family-account.dto";
+
+/**
+ * Compte de famille
+ */
+export interface FamilyAccount {
+  familyName: string,
+  childAccounts: FamilyChildAccountDto[]
+}
 
 /**
  * Objet compte d'argent de poche d'un enfant

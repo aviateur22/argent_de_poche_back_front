@@ -1,0 +1,8 @@
+<div class="w-full flex flex-column justify-content-center p-5">
+  <!-- L'image-->
+  <app-child-image class="cursor-pointer" [childImageUrl]="childImageUrl" (click)="redirectToManageChild()" ></app-child-image>
+    <!-- Le nom de l'enfant -->
+  <div class="w-full text-center flex flex-column align-content-center">
+    <p class="p-2">{{ childMoneyAccount.childName | capitalize }}</p>
+  </div>
+</div>

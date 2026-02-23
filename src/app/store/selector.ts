@@ -3,6 +3,10 @@ import { ApplicationState } from "./state";
 
 export const FeatureKey = 'APPLICATION_STATE';
 export const selectApplicationState = createFeatureSelector<ApplicationState>(FeatureKey);
+/**
+ * FamilyAccount
+ */
+export const familyAccountSelector = createSelector(selectApplicationState, state => state.familyAccount);
 
 /**
  * ChildAccount

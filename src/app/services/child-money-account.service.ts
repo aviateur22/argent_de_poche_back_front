@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
+import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, CreateChildAccountDto, CreatedChildAccountIdDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
 import { HttpClient } from '@angular/common/http';
 import apiUrl from '../../misc/api-url';
 
@@ -10,6 +10,17 @@ import apiUrl from '../../misc/api-url';
 export class ChildMoneyAccountService {
 
   private _http = inject(HttpClient);
+
+  /**
+   * Création d'un compte pour enfant
+   *
+   * @param createChildAccountDto Les données pour créer un compte d'argent de poche
+   */
+  createChildMoneyAccount(createChildAccountDto: CreateChildAccountDto): Observable<CreatedChildAccountIdDto> {
+    let url = apiUrl.createChildAccount.url;
+
+    return this._http.post<CreatedChildAccountIdDto>(url, createChildAccountDto);
+  }
 
   /**
    * Chargement d'un compte d'argent de poche
@@ -84,6 +95,18 @@ export class ChildMoneyAccountService {
   reinitializeRemainingMoney(reinitializeRemainingMoney: ReinitializeRemainingMoneyDto): Observable<ChildAccountIdDto> {
     const url = apiUrl.reinitializeRemainingMoney.url;
     return this._http.post<ChildAccountIdDto>(url, reinitializeRemainingMoney);
+  }
+
+  /**
+   * Modificaton de l'image du compte
+   *
+   * @param updateChildImageDto Les données contenant la nouvelle image du compte
+   *
+   * @returns L'identifiant du compte d'argent de poche qui est mis a jour
+   */
+  updateChildImage(updateChildImageDto: FormData): Observable<ChildAccountIdDto> {
+    const url = apiUrl.updateChildAccountImage.url;
+    return this._http.put<ChildAccountIdDto>(url, updateChildImageDto);
   }
 
 }

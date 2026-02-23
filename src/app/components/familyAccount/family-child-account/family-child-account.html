@@ -1,0 +1,27 @@
+<div (click)="redirectToChildAccountPage()" class="p-5 shadow-1 cursor-pointer w-full flex flex-column align-items-center">
+  <div>
+    @if(childImageUrl) {
+      <div class="image--wrapper">
+        <img
+          [ngSrc]="childImageUrl"
+          fill
+          placeholder="placeholder"
+          class="image"
+          priority
+          alt="">
+      </div>
+      } @else {
+        <!-- Image de Chargement-->
+        <div class="image--wrapper">
+          <img
+            [src]="placeholder"
+            class="image"
+            alt="une image de chargement">
+        </div>
+      }
+  </div>
+  <!--L'image du compte -->
+  <div class="w-full flex justify-content-center align-items-center text-center">
+    <p class="p-4">{{ childAccount.name |capitalize}}</p>
+  </div>
+</div>

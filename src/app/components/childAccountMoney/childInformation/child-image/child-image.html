@@ -1,0 +1,22 @@
+<div>
+  <!--L'image du compte -->
+  @if(childImageUrl) {
+    <div class="image--wrapper">
+      <img
+        [ngSrc]="childImageUrl"
+        fill
+        placeholder="placeholder"
+        class="image"
+        priority
+        alt="">
+    </div>
+    } @else {
+      <!-- Image de Chargement-->
+      <div class="image--wrapper">
+        <img
+          [src]="placeholder"
+          class="image"
+          alt="une image de chargement">
+      </div>
+    }
+</div>

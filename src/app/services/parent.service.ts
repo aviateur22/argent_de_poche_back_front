@@ -23,7 +23,9 @@ export class ParentService {
   /**
    * Renvoie une instance du parent authentifié
    *
-   * @returns  Le parent ou null
+   *
+   * @returns {Parent} Le parent authentifié ou null si pas de données
+   *
    */
   public getAuthenticatedParent(): Parent | null {
     try {
@@ -50,6 +52,25 @@ export class ParentService {
       return null;
     }
   }
+
+  /**
+   * Récupération de l'identifiant du parent
+   * En cas d'absence de données, redirection vers la page de connexion
+   */
+  public getParentId(): string {
+    const parentAuth = this.getAuthenticatedParent();
+
+    if(parentAuth === null) {
+      this._store.dispatch(actions.displayMessageAction({ message: {
+        isError: true,
+        title: '',
+        message: 'Echec récupération récupération identification parent'
+      } }));
+      throw new Error('Impossible de récupérer l\'identifiant du prant');
+    }
+    return parentAuth.parentId;
+  }
+
 
   /**
    * Renvoie le compte d'argent de poche actif

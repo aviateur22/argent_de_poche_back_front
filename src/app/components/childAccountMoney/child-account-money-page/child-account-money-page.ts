@@ -5,7 +5,7 @@ import { ParentService } from '../../../services/parent.service';
 import { Store } from '@ngrx/store';
 import { loadChildAccountAction } from '../../../store/actions';
 import { ActualDate } from "../actual-date/actual-date";
-import { ChildInformation } from "../child-information/child-information";
+import { ChildInformation } from "../childInformation/child-information/child-information";
 import { ChildAccountWrapper } from "../child-account-wrapper/child-account-wrapper";
 import { WeekInformation } from "../week-information/week-information";
 import { RemaminigMoney } from "../remaminig-money/remaminig-money";

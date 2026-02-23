@@ -1,19 +1,50 @@
 <app-manager-component-container [title]="title">
+
+  <div class="full flex justify-content-center">
+    @if(newSelectedImageUrl){
+      <!--Image selectionné-->
+        <div class="image--wrapper">
+          <img
+          [src]="newSelectedImageUrl"
+          class="image"
+          alt="">
+        </div>
+      } @else if(childImageUrl) {
+        <!--Image selectionné-->
+      <div class="image--wrapper">
+        <img
+          [ngSrc]="childImageUrl"
+          fill
+          placeholder="placeholder"
+          class="image"
+          priority
+          alt="">
+      </div>
+      } @else {
+        <!-- Image de Chargement-->
+        <div class="image--wrapper">
+          <img
+            [src]="placeholder"
+            class="image"
+            alt="une image de chargement">
+        </div>
+      }
+  </div>
+
+  <!-- File input masqué pour la selection d'une nouvelle image-->
    <input
       #inputFile accept=".jpg, .jpeg, .png"
       type="file"
       (change)="loadSelectedFile(inputFile?.files?.[0])"
       style="display:none;" />
 
-      <div class="w-full flex flex-column align-items-center justify-content-center p-5">
-        <img src="blob:http://localhost:4200/07309b73-1514-4880-82f5-599b5ee2941f"/>
-      </div>
+    <!--File input customisé pour sélection de la nouvelle l'image-->
+    <div class=" pt-4 flex justify-content-center">
+      <p-button [outlined]="true" severity="info" label="Sélectionner une photo" (click)="inputFile.click()"/>
+    </div>
 
-      <div class=" pt-4 flex justify-content-center">
-        <p-button [outlined]="true" severity="info" label="Sélectionner une photo" (click)="inputFile.click()"/>
-      </div>
-
-      <div class="p-2">
-        <p-button fluid (onClick)="updatePhoto()" severity="info">Enregistrer</p-button>
-      </div>
+    <!-- Enregistrement de la nouvelle image-->
+    <div class="p-2">
+      <p-button [disabled]="!newSelectedImageUrl" fluid (onClick)="updatePhoto()" severity="info">Enregistrer</p-button>
+    </div>
 </app-manager-component-container>

@@ -1,0 +1,29 @@
+<div>
+   <!--Titre-->
+    <header class="pb-6 flex w-full justify-content-center">
+      <h2 class="text-center">Création d'un compte familiale</h2>
+    </header>
+  <form [formGroup]="familyFb" (submit)="createFamilyAccount()">
+    <div class="p-2">
+      <label for="familyName">Nom de famille</label>
+      <input formControlName="familyName" id="familyName" placeholder="Le nom de famille" type="text" pInputText fluid/>
+    </div>
+
+    <div class="p-2">
+      <label for="parentName">Votre Prénom</label>
+      <input id="parentName"  formControlName="parentName" placeholder="Votre prénom" type="text" pInputText fluid/>
+    </div>
+
+    <div class="p-2">
+      <label for="email">Email</label>
+      <input id="email"  formControlName="email" placeholder="Email" type="email" pInputText fluid/>
+    </div>
+
+    <div class="p-2">
+      <label for="password">Mot de passe</label>
+      <input id="password"  formControlName="password" placeholder="Mot de passe" type="password" pInputText fluid/>
+    </div>
+
+      <p-button type="button" fluid (onClick)="createFamilyAccount()" severity="info">Créer le compte</p-button>
+  </form>
+</div>

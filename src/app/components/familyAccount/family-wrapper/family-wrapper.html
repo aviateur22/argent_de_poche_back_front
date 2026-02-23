@@ -1,0 +1,12 @@
+<div>
+   @if ((familyAccount$ | async); as familyAccount) {
+    <ng-container *ngTemplateOutlet="contentTpl; context: { $implicit: familyAccount }">
+    </ng-container>
+  }
+  <!-- Composant durant le chargement des données -->
+  @else {
+    <ng-container>
+      <p>Chargement</p>
+    </ng-container>
+  }
+</div>
