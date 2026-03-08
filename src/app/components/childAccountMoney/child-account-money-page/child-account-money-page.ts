@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnInit, signal, SimpleChanges, WritableSignal } from '@angular/core';
 import { MainContainer } from "../../share/main-container/main-container";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ParentService } from '../../../services/parent.service';
 import { Store } from '@ngrx/store';
 import { loadChildAccountAction } from '../../../store/actions';
@@ -8,9 +8,11 @@ import { ActualDate } from "../actual-date/actual-date";
 import { ChildInformation } from "../childInformation/child-information/child-information";
 import { ChildAccountWrapper } from "../child-account-wrapper/child-account-wrapper";
 import { WeekInformation } from "../week-information/week-information";
-import { RemaminigMoney } from "../remaminig-money/remaminig-money";
+
 import { MoneyMouvement } from "../reasonMovement/money-mouvement/money-mouvement";
 import { CommonModule } from '@angular/common';
+import pageUrl from '../../../../misc/page-url';
+import { RemaminigMoney } from '../remainingMoney/remaminig-money/remaminig-money';
 
 @Component({
   selector: 'app-child-account-money-page',
@@ -22,6 +24,9 @@ export class ChildAccountMoneyPage implements OnInit {
   private _activateRoute = inject(ActivatedRoute);
   private _parentService = inject(ParentService);
   private _store = inject(Store);
+  private _router = inject(Router);
+
+
 
   ngOnInit(): void {
     this.loadChildAccount();
@@ -29,11 +34,18 @@ export class ChildAccountMoneyPage implements OnInit {
 
   loadChildAccount() {
     const childAccountId = this._activateRoute.snapshot.paramMap.get('childAccountId');
-    const parentAuthenticate = this._parentService.getAuthenticatedParent();
+    const parentId = this._parentService.getParentId();
 
-    if(childAccountId && parentAuthenticate)
-      this._store.dispatch(loadChildAccountAction({ parentId: parentAuthenticate.parentId, childAccountId: childAccountId}));
+    if(childAccountId && parentId)
+      this._store.dispatch(loadChildAccountAction({ parentId, childAccountId: childAccountId}));
   }
 
+    /**
+     * Redirection
+     */
+     redirect() {
+      var url = pageUrl.familyAccount.url;
+      this._router.navigate([url]);
 
+    }
 }

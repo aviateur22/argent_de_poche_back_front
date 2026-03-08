@@ -1,0 +1,23 @@
+.remaining--color {
+  color: blueviolet;
+}
+.animate {
+  display: inline-block;
+  animation: pop 2s ease-in-out;
+
+}
+
+@keyframes pop {
+  0% {
+   transform: scale(1);
+  }
+  50% {
+    box-shadow: rgba(60, 61, 61, 0.35) 0px 20px 40px, rgba(0, 128, 128, 0.25) 0px 14px 14px;
+    color: teal;
+    border-radius: 5px;
+    border-radius: 5px;
+  }
+  100% {
+    transform: scale(1);
+  }
+}

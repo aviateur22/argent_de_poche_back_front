@@ -1,7 +1,16 @@
 import { createAction, props } from "@ngrx/store";
 import { FlashMessage } from "./model";
-import { AddMoneyMovementDto, ChildAccountDto, CreateChildAccountDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from "../models/child-money.dto";
-import { CreateFamilyAccountDto, FamilyChildAccountDto, LoadFamilyAccountDto } from "../models/family-account.dto";
+import { AddMoneyMovementDto, ChildAccountDto, CreateChildAccountDto, DesactivateChildAccountDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from "../models/child-money.dto";
+import { CreateFamilyAccountDto, FamilyAccountDto, FamilyChildAccountDto, LoadFamilyAccountDto } from "../models/family-account.dto";
+import { LoginDto, LoginResponseDto } from "../models/auth.dto";
+
+/**
+ * Auth action
+ */
+export const loginAction = createAction("[loginAction] login Action", props<{ loginDto: LoginDto }>());
+export const loginSuccessAction = createAction("[loginSuccessAction] login Success Action", props<{ loginResponse: LoginResponseDto }>());
+export const loginFailedAction = createAction("[loginFailedAction] login Failed Action");
+export const logoutAction = createAction("[logout] logout");
 
 /**
  * Actions liées à la gestion du compte d'argent de poche
@@ -35,14 +44,23 @@ export const updateChildImageCompleteAction = createAction("[updateChildImageCom
 export const updateChildImageFailedAction = createAction("[updateChildImageFailedAction] update Child Image Failed Action");
 
 export const createChildAccountAction = createAction("[createChildAccountAction] create Child Account Action", props<{ createChildAccountDto: CreateChildAccountDto }>());
-export const createChildAccountSuccessAction = createAction("[createChildAccountSuccessAction] create Child Account Success Action");
+export const createChildAccountSuccessAction = createAction("[createChildAccountSuccessAction] create Child Account Success Action", props<{ childAccountId: string }>());
 export const createChildFailedAction = createAction("[createChildFailedAction] create Child Failed Action");
+
+export const desactivateChildAccountAction = createAction("[desactivateChildAccountAction]", props<{ dto: DesactivateChildAccountDto }>());
+export const desactivateChildAccountSuccessAction = createAction("[desactivateChildAccountSuccessAction] desactivate Child Account Success Action");
+export const desactivateChildAccountFailedAction = createAction("[desactivateChildAccountFailedAction] desactivate Child Account Failed Action");
+
+/**
+ * Action liée a l'affichage de l'argent restant quand il est modifié
+ */
+export const isRemainingMoneyVisibleAction = createAction("[isRemainingMoneyVisible] is Remaining Money Visible", props<{ isVisible: boolean }>());
 
 /**
  * Actions liées à la gestion du compte de famille
  */
 export const loadFamilyAccountAction = createAction("[loadFamilyAccountAction] load Family Account Action", props<{ loadFamilyAccountDto: LoadFamilyAccountDto }>());
-export const loadFamilyAccountSuccessAction = createAction("[loadFamilyAccountSuccessAction] load Family Account Success Action", props<{ familyName: string, childAccounts: FamilyChildAccountDto[] }>());
+export const loadFamilyAccountSuccessAction = createAction("[loadFamilyAccountSuccessAction] load Family Account Success Action", props<{ family: FamilyAccountDto }>());
 export const loadFamilyAccountFailedAction = createAction("[loadFamilyAccountFailedAction] load Family Account Failed Action");
 
 export const createFamilyAccountAction = createAction("[createFamilyAccountAction] createFamilyAccountAction", props<{ createFamilyAccountDto: CreateFamilyAccountDto}>());
@@ -53,4 +71,14 @@ export const createFamilyAccounFailedAction = createAction("[createFamilyAccounF
  * Actions liées aux Flash Message
  */
 export const displayMessageAction = createAction('[Share display message] display message', props<{message: FlashMessage}>());
+
+/**
+ * Action liée à l'animation de l'argent
+ */
+export const isDisplayCoinAnimationAction = createAction('[displayCoinAnimationAction] displayCoinAnimationAction', props<{ isActive: boolean }>())
+
+/**
+ * Action liée à l'animation des confetti
+ */
+export const isDisplayConfettiAnimationAction = createAction('[DisplayConfettiAnimationAction] Display Confetti Animation Action', props<{ isActive: boolean }>())
 

@@ -1,8 +1,12 @@
-import { ChildMoneyAccount, FamilyAccount, FlashMessage, RequestStatus } from "./model";
+import { ChildMoneyAccount, DisplayRemainingMoneyOnChange, FamilyAccount, FlashMessage, IsCoinAnimationActive, IsConfettiAnimationActive, Parent, RequestStatus } from "./model";
 
 export interface ApplicationState {
+  parent: Parent,
   familyAccount: FamilyAccount,
   childMoneyAccount: ChildMoneyAccount,
   flashMessage: FlashMessage,
-  requestStatus: RequestStatus
+  requestStatus: RequestStatus,
+  displayRemainingMoneyOnChange: DisplayRemainingMoneyOnChange,
+  isCoinAnimationActive: IsCoinAnimationActive,
+  isConfettiAnimationActive: IsConfettiAnimationActive
 }

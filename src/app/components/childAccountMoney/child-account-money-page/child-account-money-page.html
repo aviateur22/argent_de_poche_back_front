@@ -1,28 +1,36 @@
-<app-main-container class="flex w-full">
+<app-main-container>
+  <!--Redirection-->
+  <div class="p-2 sticky ml-auto top-0">
+    <button (click)="redirect()" class="blue-50 shadow-4 border-circle w-2rem h-2rem cursor-pointer border-none">X</button>
+  </div>
+
   <!-- wrapper contenant les données de childMoneyAccount -->
   <app-child-account-wrapper>
+
     <ng-template let-childMoneyAccount>
       <div class="flex flex-column align-items-center">
+
+
         <!-- Date du jour -->
         <app-actual-date [childMoneyAccount]=childMoneyAccount></app-actual-date>
 
         <!-- Information nom + photo de l'enfant -->
-        <app-child-information [childMoneyAccount]=childMoneyAccount></app-child-information>
+        <app-child-information class="w-full flex justify-centent-center align-items-center" [childMoneyAccount]=childMoneyAccount></app-child-information>
 
         <!-- La semaine -->
         <app-week-information [childMoneyAccount]=childMoneyAccount></app-week-information>
 
         <!-- Argent de poche-->
-        <app-remaminig-money [childMoneyAccount]=childMoneyAccount></app-remaminig-money>
+        <app-remaminig-money [childMoneyAccount]=childMoneyAccount class="w-full"></app-remaminig-money>
 
         <!-- Rasion des mouvement d'argent de poche disponible -->
-        <div class="w-full max-w-30rem flex justify-content-center">
-          <div class="flex flex-wrap gap-2 justify-content-center">
+        <div class="w-9 flex w-full justify-content-center align-items-center">
+          <div class="grid">
             @for (reasonMovement of childMoneyAccount.availableReasonMovements; track $index) {
               <app-money-mouvement
-              class="p-3 w-5 shadow-1" [reasonMovement]=reasonMovement>
+              class="p-3 col-12 shadow-6 md:col-6" [reasonMovement]=reasonMovement>
             </app-money-mouvement>
-            }
+          }
           </div>
         </div>
       </div>

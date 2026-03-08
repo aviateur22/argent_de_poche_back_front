@@ -6,6 +6,7 @@ import { Store } from "@ngrx/store";
 import { ApplicationState } from "../store/state";
 import * as actions from "../store/actions";
 import pageUrl from "../../misc/page-url";
+import { initialState } from "../store/reducer";
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,38 @@ export class ParentService {
   private _router = inject(Router);
   private _store = inject(Store<ApplicationState>);
 
+  /**
+   * Persistance des données du parent connecté
+   *
+   * @param authenticatedParent  Le parent qui est connecté
+   * @param jwt Le jwt permattnt d'authantifier le parent
+   */
   public persistAuthentifiedParent(authenticatedParent: Parent, jwt: string) {
-    this.setActiveParent(authenticatedParent);
-    this.setParentJwt(jwt);
+    this.setActiveParent(authenticatedParent, jwt);
+  }
+
+
+  /**
+   * Récupération de l'identifiant du parent
+   * En cas d'absence de données, redirection vers la page de connexion
+   */
+  public getParentId(): string {
+    const parentAuth = this.getAuthenticatedParent();
+
+    if(parentAuth === null) {
+      this._store.dispatch(actions.displayMessageAction({ message: {
+        isError: true,
+        title: '',
+        message: 'Echec récupération récupération identification parent'
+      } }));
+      throw new Error('Impossible de récupérer l\'identifiant du prant');
+    }
+    return parentAuth.parentId;
+  }
+
+  public logout() {
+    localStorage.clear();
+    this._store.dispatch(actions.logoutAction())
   }
 
   /**
@@ -27,7 +57,7 @@ export class ParentService {
    * @returns {Parent} Le parent authentifié ou null si pas de données
    *
    */
-  public getAuthenticatedParent(): Parent | null {
+  private getAuthenticatedParent(): Parent | null {
     try {
       const parentFromStorage = localStorage.getItem(APP_CONSTANT.ACTIVE_PARENT);
 
@@ -53,52 +83,10 @@ export class ParentService {
     }
   }
 
-  /**
-   * Récupération de l'identifiant du parent
-   * En cas d'absence de données, redirection vers la page de connexion
-   */
-  public getParentId(): string {
-    const parentAuth = this.getAuthenticatedParent();
 
-    if(parentAuth === null) {
-      this._store.dispatch(actions.displayMessageAction({ message: {
-        isError: true,
-        title: '',
-        message: 'Echec récupération récupération identification parent'
-      } }));
-      throw new Error('Impossible de récupérer l\'identifiant du prant');
-    }
-    return parentAuth.parentId;
-  }
-
-
-  /**
-   * Renvoie le compte d'argent de poche actif
-   *
-   * @returns Le numero du comte ou Null
-   */
-  public getActiveChildAccountMoney(): string | null {
-    const childAccountFromStorage = localStorage.getItem(APP_CONSTANT.ACTIVE_PARENT);
-
-    if(!childAccountFromStorage)
-      return null;
-
-    return JSON.parse(childAccountFromStorage);
-  }
-
-  public logout() {
-    localStorage.clear();
-  }
-
-  private setActiveChildAccount(childAccountId: string) {
-    localStorage.setItem(APP_CONSTANT.ACTIVE_CHILD_ACCOUNT, JSON.stringify(childAccountId));
-  }
-
-  private setActiveParent(activeParent: Parent) {
+  private setActiveParent(activeParent: Parent, jwt: string) {
+    console.log(activeParent);
     localStorage.setItem(APP_CONSTANT.ACTIVE_PARENT, JSON.stringify(activeParent));
-  }
-
-  private setParentJwt(jwt: string) {
     localStorage.setItem(APP_CONSTANT.HEADER_AUTHORIZATION_BEARER, JSON.stringify(jwt));
   }
 

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FamilyAccountDto } from '../../../models/family-account.dto';
 import { CapitalizePipe } from '../../../pipe/capitalize-pipe';
+import { Parent } from '../../../store/model';
 
 @Component({
   selector: 'app-family-detail',
@@ -9,6 +10,6 @@ import { CapitalizePipe } from '../../../pipe/capitalize-pipe';
   styleUrl: './family-detail.css',
 })
 export class FamilyDetail {
-  @Input() familyAccount!: FamilyAccountDto
+  @Input() parent!: Parent;
 
 }

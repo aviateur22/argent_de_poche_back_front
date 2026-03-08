@@ -22,6 +22,8 @@ export class DevService {
     const fictiveParent: Parent = {
       parentId: '1',
       roles: [],
+      parentName: '',
+      familyName: '',
       sessionValidUntil: dateIn10Day
     }
 

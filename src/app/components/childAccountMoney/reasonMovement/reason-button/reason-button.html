@@ -1,3 +1,10 @@
-<div (click)="addMoneyMovement()" class="cursor-pointer w-2rem h-2rem border-circle shadow-2 p-1 flex align-items-center justify-content-center">
-  <span> {{ actionCode }}</span>
+<div
+  [class.animate]="isAnimationActive()"
+  (click)="addMoneyMovement()"
+  class="cursor-pointer w-3rem h-3rem border-circle shadow-2 flex align-items-center justify-content-center">
+  <!-- div pour contenir l'image -->
+  <div class="rounded">
+    <!-- L'image-->
+    <img [src]="imagePath"/>
+  </div>
 </div>

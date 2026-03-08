@@ -8,5 +8,5 @@ export class ChildMoneyAccountModel {
   public readonly startPeriodDate: Date,        // Date de début de période
   public readonly endPeriodDate: Date,          // Date de fin de période
   ) {}
-
 }
+

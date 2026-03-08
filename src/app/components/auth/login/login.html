@@ -1,1 +1,45 @@
-<p>login works!</p>
+<app-main-container>
+  <div class="flex flex-1 justify-content-center align-items-center">
+    <div class="flex flex-1 flex flex-column">
+      <!--Titre-->
+       <header class="pb-6 flex w-full justify-content-center">
+         <h2 class="text-cyan-500 text-center">Connexion au compte familial</h2>
+       </header>
+       <div class="h-full flex-1 p-2 flex justify-content-center align-items-center">
+         <form class="flex flex-1 flex-column" [formGroup]="connexionFb" (submit)="loginToFamilyAccount()">
+
+            <!--formulaire de connexion-->
+            <div class="flex flex-column">
+              <!-- Email-->
+              <div class="h-6rem p-2">
+                <label for="email">Email</label>
+                <input id="email" [invalid]="connexionFb.get('email')?.invalid && connexionFb.get('email')?.touched" formControlName="email" placeholder="Email" type="email" pInputText fluid/>
+                @if(connexionFb.get('email')?.invalid && connexionFb.get('email')?.touched) {
+                  <p-message class="p-1" severity="error" size="small" variant="simple">L'email est obligatoire</p-message>
+                }
+              </div>
+
+              <!-- Password-->
+              <div class="h-6rem p-2">
+                <label for="password">Mot de passe</label>
+                <input id="password" [invalid]="connexionFb.get('password')?.invalid && connexionFb.get('password')?.touched" formControlName="password" placeholder="Mot de passe" type="password" pInputText fluid/>
+                @if(connexionFb.get('password')?.invalid && connexionFb.get('password')?.touched) {
+                  <p-message class="p-1" severity="error" size="small" variant="simple">Le mot de passe est obligatoire</p-message>
+                }
+              </div>
+            </div>
+
+             <!--submit button-->
+             <div class="flex-grow-0">
+               <p-button type="submit" fluid severity="info">Se connnecter</p-button>
+             </div>
+
+             <!--Redirection-->
+             <div class="flex p-2">
+               <app-link (click)="redirectToCreateFamilyPage()" linkMessage="Je n'ai pas encore de compte"></app-link>
+             </div>
+         </form>
+       </div>
+    </div>
+  </div>
+</app-main-container>

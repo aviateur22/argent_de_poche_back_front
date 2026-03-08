@@ -77,3 +77,11 @@ export interface CreateChildAccountDto {
 export interface CreatedChildAccountIdDto {
   createdChildAccountId: string
 }
+
+/**
+ * Dto permettant de désactiver l'argent de poche restant
+ */
+export interface DesactivateChildAccountDto {
+  parentId: string,
+  childAccountId: string
+}

@@ -2,10 +2,18 @@ import { ReasonMovementDto } from "../models/child-money.dto";
 import { FamilyChildAccountDto } from "../models/family-account.dto";
 
 /**
+ * Parent
+ */
+export interface Parent {
+  parentName: string,
+  familyName: string
+}
+
+/**
  * Compte de famille
  */
 export interface FamilyAccount {
-  familyName: string,
+  familyAccountId: string,
   childAccounts: FamilyChildAccountDto[]
 }
 
@@ -25,8 +33,19 @@ export interface ChildMoneyAccount {
   availableReasonMovements : ReasonMovement[]
 }
 
+/**
+ * Les raison de mouvement d'argent disponible pour un compte
+ */
 export interface ReasonMovement extends ReasonMovementDto {
 
+}
+
+/**
+ * Objet permettant d'afficher le composant "app-remaining-money-animation"
+ * Quand l'argent de poche restant est modifiée
+ */
+export interface DisplayRemainingMoneyOnChange {
+  isVisible: boolean;
 }
 
 /**
@@ -44,4 +63,18 @@ export interface FlashMessage {
 export interface RequestStatus {
     isLoading: boolean,
     isSuccess: boolean,
+}
+
+/**
+ * Animation chute des pieces
+ */
+export interface IsCoinAnimationActive {
+  isActive: boolean
+}
+
+/**
+ * Animation chute des confettis
+ */
+export interface IsConfettiAnimationActive {
+  isActive: boolean
 }

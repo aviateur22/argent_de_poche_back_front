@@ -1,8 +1,13 @@
 <!--Composant permattant de gérer l'argent de poche -->
-<div class="w-full flex h-6rem h-full flex-column align-items-center justify-content-between">
-  <p class="p-2 w-full text-center">{{ reasonMovement.reasonName}}</p>
-  <div class="w-7rem flex justify-content-between md:w-full">
-    <app-reason-button [reasonCode]=reasonMovement.reasonCode [actionCode]=reasonMovement.addMoneyActionCode></app-reason-button>
-    <app-reason-button [reasonCode]=reasonMovement.reasonCode [actionCode]=reasonMovement.removeMoneyActionCode></app-reason-button>
+<div class="relative w-full flex h-10rem h-full flex-column align-items-center justify-content-between">
+  <!--Nom raison de l'ajout-->
+  <div class="w-full z-1 p-3 text--blur">
+    <p class="w-full text-center font-semibold">{{ reasonMovement.reasonName}}</p>
+  </div>
+  <!---->
+  <img class="absolute z-0" [src]="imageSrc" alt="">
+  <div class="w-10rem flex justify-content-between md:w-10">
+    <app-reason-button imagePath="/images/bien.svg" [reasonCode]=reasonMovement.reasonCode [actionCode]=reasonMovement.addMoneyActionCode></app-reason-button>
+    <app-reason-button imagePath="/images/mal.svg" [reasonCode]=reasonMovement.reasonCode [actionCode]=reasonMovement.removeMoneyActionCode></app-reason-button>
   </div>
 </div>

@@ -1,0 +1,25 @@
+<app-main-container>
+ <div class="p-5 flex flex-1 justify-content-center align-items-center">
+    <div class="flex flex-1 flex flex-column">
+      <!--Titre-->
+       <header class="shadow-2 border-round-md p-2 bg-white">
+         <h2 class="text-cyan-500 text-center">Argent de poche</h2>
+       </header>
+       <div class="h-full flex flex-column p-2 flex justify-content-center align-items-center">
+          <!--Redirection-->
+          <div class="flex p-2">
+            <app-link (click)="redirectToLoginPage()" linkMessage="J'ai déjà un compte. Me connecter"></app-link>
+          </div>
+
+          <!--Redirection-->
+          <div class="flex">
+            <app-link (click)="redirectToCreateFamilyPage()" linkMessage="Je n'ai pas encore de compte"></app-link>
+          </div>
+       </div>
+       <!--Image de fond-->
+       <div class="h-full h-20rem background--image">
+
+       </div>
+    </div>
+  </div>
+</app-main-container>

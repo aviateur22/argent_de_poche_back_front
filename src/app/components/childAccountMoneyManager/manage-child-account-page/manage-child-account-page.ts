@@ -12,17 +12,20 @@ import { ManagerChildName } from "../manager-child-name/manager-child-name";
 import { ManagerInitialMoney } from "../manager-initial-money/manager-initial-money";
 import { ManagerRemainingMoney } from "../manager-remaining-money/manager-remaining-money";
 import { ManagerChildImage } from "../manager-child-image/manager-child-image";
+import { Router } from '@angular/router';
+import pageUrl from '../../../../misc/page-url';
+import { DesactivateChildAccount } from "../desactivate-child-account/desactivate-child-account";
 
 
 @Component({
   selector: 'app-manage-child-account',
-  imports: [MainContainer, InputNumberModule, InputTextModule, ButtonModule, FormsModule, ConfirmDialogModule, ManagerChildName, ManagerInitialMoney, ManagerRemainingMoney, ManagerChildImage],
+  imports: [MainContainer, InputNumberModule, InputTextModule, ButtonModule, FormsModule, ConfirmDialogModule, ManagerChildName, ManagerInitialMoney, ManagerRemainingMoney, ManagerChildImage, DesactivateChildAccount],
   templateUrl: './manage-child-account-page.html',
   styleUrl: './manage-child-account-page.css',
 })
 export class ManageChildAccountPage implements OnInit {
-  private _store = inject(Store);
   private _parentService = inject(ParentService);
+  private _router = inject(Router);
 
   /**
    * Les données du compte d'argent de poche.
@@ -30,6 +33,7 @@ export class ManageChildAccountPage implements OnInit {
   */
   childMoneyAccount!: ChildMoneyAccount
   childImageurl!: string
+
 
   /**
    * L'identifiant du parent
@@ -45,6 +49,15 @@ export class ManageChildAccountPage implements OnInit {
 
       // Récupération de l'identifiant du parent
       this.parentId = this._parentService.getParentId();
+  }
+
+  /**
+   * Redirection
+   */
+   redirect() {
+    var url = pageUrl.childAccount.url.replace(':childAccountId', this.childMoneyAccount.childMoneyAccountId);
+    this._router.navigate([url]);
+
   }
 
 }

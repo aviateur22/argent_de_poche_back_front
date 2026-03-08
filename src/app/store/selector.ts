@@ -9,6 +9,11 @@ export const selectApplicationState = createFeatureSelector<ApplicationState>(Fe
 export const familyAccountSelector = createSelector(selectApplicationState, state => state.familyAccount);
 
 /**
+ * Parent
+ */
+export const parentSelector = createSelector(selectApplicationState, state => state.parent);
+
+/**
  * ChildAccount
  */
 export const childMoneyAccountSelector = createSelector(selectApplicationState, state => state.childMoneyAccount);
@@ -17,3 +22,18 @@ export const childMoneyAccountSelector = createSelector(selectApplicationState, 
  * Request Status
  */
 export const requestStatusSelector = createSelector(selectApplicationState, state => state.requestStatus);
+
+/**
+ * Visibilité du composant "app-remaining-money-animation"
+ */
+export const isRemainingMoneyVisibleSelector = createSelector(selectApplicationState, state => state.displayRemainingMoneyOnChange.isVisible);
+
+/**
+ * Animation chute des pieces
+ */
+export const isDisplayCoinAnimationSelector = createSelector(selectApplicationState, state => state.isCoinAnimationActive.isActive);
+
+/**
+ * Animation confetti
+ */
+export const isDisplayConfettiAnimationSelector = createSelector(selectApplicationState, state => state.isConfettiAnimationActive.isActive);

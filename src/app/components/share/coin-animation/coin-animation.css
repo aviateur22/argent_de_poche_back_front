@@ -1,0 +1,191 @@
+
+.artifice{
+  position:absolute;
+  bottom: 0;
+  left:0;
+}
+
+.artifice--right{
+  position:absolute;
+  bottom: 0;
+  right:0;
+  transform: scaleX(-1);
+}
+
+
+/* Mouvement monnaie provenant de la gauche */
+.artifice .coin1:nth-child(1){
+  --x:200px;
+  --y:50px;
+  offset-path: path("M0,0 C200,100 300,200 400, 500");
+}
+.artifice .coin2:nth-child(2){
+  --x:150px;
+  --y:150px;
+ offset-path: path("M0,0 C100,300 400,200 500, 400");
+}
+.artifice .coin2:nth-child(3){
+  --x:300px;
+  --y:120px;
+  offset-path: path("M0,0 C300,100 500, 400 500, 400");
+}
+.artifice .coin1:nth-child(4){
+  --x:200px;
+  --y:50px;
+  offset-path: path("M0,0 C200,100 300,200 400, 500");
+}
+.artifice .coin1:nth-child(5){
+  --x:100px;
+  --y:220px;
+  offset-path: path("M0,0 C300,500 200,400 600,700");
+}
+.artifice .coin2:nth-child(6){
+  --x:350px;
+  --y:80px;
+  offset-path: path("M0,0 C300,50 200,400 600, 700");
+}
+.artifice .centime:nth-child(7){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300, 200 600, 500");}
+
+.artifice .centime:nth-child(8){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300,200 600, 500");
+}
+.artifice .centime:nth-child(9){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300,200 400,500");
+}
+.artifice .centime:nth-child(10){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300,200 500, 450");
+}
+
+/* Mouvement monnaie provenant de la droite */
+.artifice--right .coin1:nth-child(1){
+  --x:200px;
+  --y:50px;
+  offset-path: path("M0,0 C200,100 300,200 400, 500");
+}
+.artifice--right .coin2:nth-child(2){
+  --x:150px;
+  --y:150px;
+ offset-path: path("M0,0 C100,300 400,200 500, 400");
+}
+
+.artifice--right .coin1:nth-child(3){
+  --x:300px;
+  --y:120px;
+  offset-path: path("M0,0 C300,100 500, 400 500, 400");
+}
+.artifice--right .coin1:nth-child(4){
+  --x:200px;
+  --y:50px;
+  offset-path: path("M0,0 C200,100 300,200 400, 500");
+}
+.artifice--right .coin2:nth-child(5){
+  --x:100px;
+  --y:220px;
+  offset-path: path("M0,0 C300,500 200,400 600,700");
+}
+.artifice--right .coin1:nth-child(6){
+  --x:350px;
+  --y:80px;
+  offset-path: path("M0,0 C300,50 200,400 600, 700");
+}
+.artifice--right .centime:nth-child(7){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300, 200 600, 500");}
+
+.artifice--right .centime:nth-child(8){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300,200 600, 500");
+}
+.artifice--right .centime:nth-child(9){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300,200 400,500");
+}
+.artifice--right .centime:nth-child(10){
+  --x:450px;
+  --y:150px;
+  offset-path: path("M0,0 C200,100 300,200 500, 450");
+}
+
+.coin, .coin1, .coin2{
+  font-size: 20px !important;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #fff8b0, #d4af37 60%, #8c6b1f);
+  box-shadow:
+    inset -8px -8px 15px rgba(0,0,0,0.4),
+    inset 8px 8px 15px rgba(255,255,255,0.4),
+    0 10px 20px rgba(0,0,0,0.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:60px;
+  font-weight:bold;
+  color:#7a5b00;
+  border:6px solid #caa133;
+  animation: explode 5s linear;
+}
+
+.coin2 {
+  width:60px;
+  height:60px;
+}
+
+
+
+.centime{
+  font-size: 15px !important;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #f3961c, #ecb706 60%, #8c6b1f);
+  box-shadow:
+    inset -8px -8px 15px rgba(0,0,0,0.4),
+    inset 8px 8px 15px rgba(241, 150, 31, 0.4),
+    0 10px 20px rgba(0,0,0,0.5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:60px;
+  font-weight:bold;
+  color:#574510;
+  border:6px solid #f89748;
+  animation: explode 5s linear;
+
+}
+
+
+@keyframes explode{
+
+  0%{
+    offset-distance:0%;
+    transform: translate(0,0) scale(0);
+    opacity:1;
+  }
+
+  20%{
+    transform: translate(0,0) scale(1);
+  }
+
+  70% {
+    opacity:0.8
+  }
+
+  100%{
+    offset-distance:100%;
+    transform: translate(var(--x), var(--y)) scale(0.5);
+    opacity:0;
+  }
+}

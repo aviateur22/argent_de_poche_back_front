@@ -10,16 +10,19 @@ import { Store } from '@ngrx/store';
 import * as actions from "../../../store/actions";
 import { CreateChildAccountDto } from '../../../models/child-money.dto';
 import { ParentService } from '../../../services/parent.service';
+import { Router } from '@angular/router';
+import pageUrl from '../../../../misc/page-url';
 
 @Component({
   selector: 'app-create-child-account-page',
   imports: [MainContainer, CreateChildName, InputNumberModule , InputTextModule, ButtonModule, FormsModule, ConfirmDialogModule],
   templateUrl: './create-child-account-page.html',
-  styleUrl: './create-child-account-page.css',
+  styleUrl: './create-child-account-page.css'
 })
 export class CreateChildAccountPage {
   private _store = inject(Store);
   private _parentService = inject(ParentService);
+  private _router = inject(Router);
 
 
   /**
@@ -43,6 +46,13 @@ export class CreateChildAccountPage {
     }
 
     this._store.dispatch(actions.createChildAccountAction({ createChildAccountDto }))
+  }
+
+  /**
+   * Redirection au compte de famille
+   */
+  redirectToFamilyAccount() {
+    this._router.navigate([pageUrl.familyAccount.url]);
   }
 
 }

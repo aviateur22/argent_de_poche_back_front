@@ -34,7 +34,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
           break;
         }
         default: {
-          console.error('Unhandled error:', error);
+
           break;
         }
       }

@@ -25,27 +25,63 @@ export const initialState: ApplicationState = {
     isSuccess: false
   },
   familyAccount: {
-    familyName: "",
-    childAccounts: []
+    childAccounts: [],
+    familyAccountId: ""
+  },
+  displayRemainingMoneyOnChange: {
+    isVisible: false
+  },
+  parent: {
+    parentName: "",
+    familyName: ""
+  },
+  isCoinAnimationActive: {
+    isActive: false
+  },
+  isConfettiAnimationActive: {
+    isActive: false
   }
 }
 
 export const applicationReducers  = createReducer(
   initialState,
+  on(actions.logoutAction, () => initialState),
+  on(actions.loginAction, state => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.loginSuccessAction, (state, { loginResponse } ) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    },
+    parent: {
+      parentName: loginResponse.parentName,
+      familyName: loginResponse.familyName
+    }
+  })),
+  on(actions.loginFailedAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
   on(actions.loadFamilyAccountAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
       isSuccess: false
     }
   })),
-  on(actions.loadFamilyAccountSuccessAction, (state, { childAccounts, familyName }) => ({
+  on(actions.loadFamilyAccountSuccessAction, (state, { family }) => ({
     ...state, requestStatus: {
       isLoading: false,
       isSuccess: true
     },
     familyAccount: {
-      familyName: familyName,
-      childAccounts: childAccounts
+      familyAccountId: family.familyAccountId,
+      childAccounts: family.childs
     }
   })),
   on(actions.loadFamilyAccountFailedAction, state => ({
@@ -186,4 +222,38 @@ export const applicationReducers  = createReducer(
       isSuccess: false
     }
   })),
+  on(actions.isRemainingMoneyVisibleAction, (state, { isVisible }) => ({
+    ...state, displayRemainingMoneyOnChange: {
+      isVisible
+    }
+  })),
+  on(actions.isDisplayCoinAnimationAction, (state, { isActive }) => ({
+    ...state, isCoinAnimationActive: {
+      isActive
+    }
+  })),
+   on(actions.isDisplayConfettiAnimationAction, (state, { isActive }) => ({
+    ...state, isConfettiAnimationActive: {
+      isActive
+    }
+  })),
+  on(actions.desactivateChildAccountAction, (state ) => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+   on(actions.desactivateChildAccountSuccessAction, (state ) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    }
+  })),
+   on(actions.desactivateChildAccountFailedAction, (state ) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+
 )

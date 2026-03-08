@@ -1,0 +1,12 @@
+@if(isRemainingMoneyUpdate$ | async ) {
+  @if(account$ | async; as childAccount) {
+    <div class="center z-5">
+      <div class="w-15rem surface-0 m-5 p-3 shadow-4 border-none border-round-md add--money text-center"
+      animate.enter="enter-animation"
+      animate.leave="leaving">
+        <p> argent de poche restant: </p>
+        <p class="">{{ childAccount.remainingMoney | currency: 'EUR' }}</p>
+      </div>
+    </div>
+  }
+}

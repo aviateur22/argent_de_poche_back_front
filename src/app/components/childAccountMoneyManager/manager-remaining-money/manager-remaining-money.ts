@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -21,8 +21,9 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './manager-remaining-money.html',
   styleUrl: './manager-remaining-money.css',
 })
-export class ManagerRemainingMoney implements OnInit {
-  @Input() childMoneyAccount!: ChildMoneyAccount;
+export class ManagerRemainingMoney implements OnInit, OnChanges {
+
+  @Input() childMoneyAccount: ChildMoneyAccount | null = null;
   @Input() parentId!: string;
   @Input() title!: string;
   private _confirmationService = inject(ConfirmationService);
@@ -31,17 +32,29 @@ export class ManagerRemainingMoney implements OnInit {
   private _childMoneyAccount$ = this._store.pipe(select(selectors.childMoneyAccountSelector), startWith(null));
 
   ngOnInit(): void {
-    /**
-     * Abonement a l'action refreshChildAccountSuccessAction afin de mettre à jour
-     * l'argent de poche restant lors de modification
-     */
-    this._actions$
+  /**
+   * Abonement a l'action refreshChildAccountSuccessAction afin de mettre à jour
+   * l'argent de poche restant lors de modification
+   */
+  this._actions$
     .pipe(ofType(actions.refreshChildAccountSuccessAction),
     take(1),
     switchMap(() => this._childMoneyAccount$)
     ).subscribe(childAccount => {
-      this.childMoneyAccount.remainingMoney = childAccount!.remainingMoney
+      if(this.childMoneyAccount && this.childMoneyAccount.remainingMoney)
+        this.childMoneyAccount.remainingMoney = childAccount!.remainingMoney
     })
+  }
+
+   ngOnChanges(changes: SimpleChanges): void {
+  this._actions$
+    .pipe(ofType(actions.refreshChildAccountSuccessAction),
+    take(1),
+    switchMap(() => this._childMoneyAccount$)
+    ).subscribe(childAccount => {
+      if(this.childMoneyAccount && this.childMoneyAccount.remainingMoney)
+        this.childMoneyAccount.remainingMoney = childAccount!.remainingMoney
+    });
   }
 
   /**
@@ -60,6 +73,9 @@ export class ManagerRemainingMoney implements OnInit {
         outlined: true
       },
       accept: () =>{
+        if(! this.childMoneyAccount)
+          return;
+
         const reinitializeRemainingMoneyDto: ReinitializeRemainingMoneyDto = {
           childAccountId: this.childMoneyAccount.childMoneyAccountId,
           parentId: this.parentId

@@ -1,12 +1,12 @@
-<!-- Confirm dialog -->
-<p-confirmdialog />
-
 <app-main-container>
+  <!--Redirection-->
+  <button (click)="redirect()" class="m-2 surface-0 sticky ml-auto top-0 shadow-4 border-circle w-2rem h-2rem cursor-pointer border-none">X</button>
 
   <div class="p-5">
+
     <!--Titre-->
     <header class="pb-6 flex w-full justify-content-center">
-      <h2 class="text-center">Modification de l'image du compte</h2>
+      <h2 class="text-cyan-500 text-center">Modification de l'image du compte</h2>
     </header>
 
     <!-- Modification de l'image -->
@@ -20,5 +20,9 @@
 
     <!-- Reinitilasation argent de poche restant-->
     <app-manager-remaining-money [parentId]="parentId" [childMoneyAccount]="childMoneyAccount"  title="Reinitialisation argent de poche restant"></app-manager-remaining-money>
+
+    <!-- Désactivation du compte-->
+    <app-desactivate-child-account [parentId]="parentId" [childMoneyAccount]="childMoneyAccount"  title="Désactivation du compte d'argent de poche"></app-desactivate-child-account>
+
   </div>
 </app-main-container>

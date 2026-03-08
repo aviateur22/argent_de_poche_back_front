@@ -1,3 +1,6 @@
+<!-- Confirm dialog -->
+<p-confirmdialog />
+
 <!--Overlay de chargement -->
 <app-loading-overlay></app-loading-overlay>
 
@@ -10,4 +13,20 @@
     }">
 ></p-toast>
 
-<router-outlet></router-outlet>
+<!--Animation d'argent-->
+<app-coin-animation></app-coin-animation>
+
+<!-- Argent de poche restant qui s'anime en cas de changement -->
+<app-remaining-money-animation></app-remaining-money-animation>
+
+<!--navbar-->
+<app-nav></app-nav>
+
+<!-- Animation de confetti-->
+@if(isDisplayConfettiAnimation$ | async) {
+  <app-confetti></app-confetti>
+}
+
+<div class="page-wrapper" [class.page-enter]="animatePage()">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>

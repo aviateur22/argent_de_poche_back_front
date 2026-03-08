@@ -1,6 +1,6 @@
 <app-manager-component-container [title]="title">
   <div class="p-2">
-      <p>{{ childMoneyAccount.remainingMoney | currency: 'EUR'}}</p>
+      <p>{{ childMoneyAccount?.remainingMoney | currency: 'EUR'}}</p>
   </div>
   <p-button fluid (onClick)="reinitializeRemainingMoney()" severity="info"> Réinitialiser l'argent de poche restant </p-button>
 </app-manager-component-container>
