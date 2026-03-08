@@ -1,0 +1,42 @@
+.center {
+  position: fixed;
+  top: 0;
+  padding: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 200ms ease-in;
+    @starting-style {
+      opacity: 0;
+    }
+}
+
+.add--money {
+  box-shadow:
+  0 2px 4px rgba(34, 197, 94, 0.2),
+  0 4px 12px rgba(34, 197, 94, 0.3) !important;
+}
+
+
+.enter-animation {
+  animation: slide-fade 1s;
+}
+
+
+.leaving {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

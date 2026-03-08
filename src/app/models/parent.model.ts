@@ -4,6 +4,8 @@
  */
 export interface Parent {
   parentId: string,
+  parentName:string,
+  familyName: string,
   roles: string [],
   sessionValidUntil: Date
 }

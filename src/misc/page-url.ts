@@ -1,8 +1,16 @@
 import { environment } from "../environment/environment";
 
 export default {
+  login: {
+    url: 'auth/connexion',
+    title:  `${environment.main_page_title} | Connexion au compte familliale`
+  },
   home: {
     url: '',
+    title:  `${environment.main_page_title} | Bienvenue`
+  },
+  notFound: {
+    url: 'demande/page-inexistante',
     title:  `${environment.main_page_title} | Bienvenue`
   },
   childAccount: {
@@ -13,20 +21,24 @@ export default {
     url: 'compte/modification',
     title:  `${environment.main_page_title} | Modification`
   },
-  login: {
-    url: 'auth/connexion',
-    title:  `${environment.main_page_title} | Connexion`
-  },
   createChildAccount: {
     url: 'compte/enfant/creation',
     title:  `${environment.main_page_title} | Création compte`
   },
   familyAccount: {
-   url: 'famille',
-  title:  `${environment.main_page_title} | Famille`
+    url: 'famille',
+    title:  `${environment.main_page_title} | Famille`
   },
   createFamilyAccount: {
    url: 'famille/creation',
   title:  `${environment.main_page_title} | Création compte famille`
+  },
+  createFamilyAccountSuccess: {
+   url: 'famille/sucess-creation',
+  title:  `${environment.main_page_title} | Succés création compte famille`
+  },
+  desactivateChildAccountSuccess: {
+   url: 'compte/enfant/success-desactivation',
+  title:  `${environment.main_page_title} | Désactivation compte enfant`
   }
 }

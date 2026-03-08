@@ -1,14 +1,43 @@
-<app-main-container class="flex w-full">
-  <app-family-wrapper>
-    <ng-template let-familyAccount>
-      <!-- Données sur la famille-->
-      <app-family-detail [familyAccount]="familyAccount"></app-family-detail>
+<app-main-container>
+   <!--Redirection-->
 
-      <!-- Comptes d'argents de poche de la famille -->
-      <div class="flex flex-wrap gap-3">
-        @for (childAccount of familyAccount.childAccounts; track $index) {
-          <app-family-child-account [parentId]="parentId"  [childAccount]="childAccount"></app-family-child-account>
+
+  <app-family-wrapper class="flex w-full flex-1 justify-content-center">
+    <ng-template let-familyAccount>
+      <div class="flex flex-column flex-1 w-full h-full">
+        <!-- Données sur la famille-->
+        @if(parent$ | async; as parent) {
+          <app-family-detail [parent]="parent"></app-family-detail>
         }
+
+        <div class="flex flex-1 w-full flex-column">
+          @if(familyAccount.childAccounts.length == 0) {
+            <div class="flex flex-1 flex-column justify-content-center">
+              <p>Vous n'avez pas encore créer de compte</p>
+
+              <!--Button avec animation pour ajouter un compte -->
+              <div class="w-full p-5 flex justify-content-center">
+                <p-button class="fadeout animation-duration-1000 animation-iteration-infinite" (onClick)="redirectToAddChildAccount()" label="Ajouter un compte" [raised]="true" severity="success" />
+              </div>
+
+            </div>
+          }@else {
+            <div class="flex flex-1 flex-column">
+              <!-- Comptes d'argents de poche de la famille -->
+              <div class="flex flex-grow-1 flex-wrap gap-3 align-items-center justify-content-center">
+                @for (childAccount of familyAccount.childAccounts; track $index) {
+                  <app-family-child-account [parentId]="parentId"  [childAccount]="childAccount"></app-family-child-account>
+                }
+              </div>
+
+              <!--Button sans animation pour ajouter un compte -->
+              <div class="w-full p-5 flex justify-content-center">
+                <p-button (onClick)="redirectToAddChildAccount()" label="Ajouter un compte" [raised]="true" severity="info" />
+              </div>
+
+            </div>
+          }
+        </div>
       </div>
     </ng-template>
   </app-family-wrapper>

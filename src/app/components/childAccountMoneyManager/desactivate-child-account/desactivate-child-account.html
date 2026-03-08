@@ -1,0 +1,10 @@
+<app-manager-component-container [title]="title">
+
+   <div class="p-2">
+      <input [(ngModel)]="confirmChildName" type="text" pInputText fluid/>
+      <p class="text-xs font-semibold p-1">Pour désactiver le compte d'argent de poche écriver le mot <span class="text-orange-500 font-bold">{{childMoneyAccount.childName}}</span></p>
+    </div>
+
+  <p-button fluid (onClick)="desactivateAccount()" [disabled]="confirmChildName !== childMoneyAccount.childName || confirmChildName === ''"  severity="danger">Désactiver</p-button>
+
+</app-manager-component-container>

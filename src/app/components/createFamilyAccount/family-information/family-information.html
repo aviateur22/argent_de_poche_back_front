@@ -1,27 +1,50 @@
-<div>
+<div class="p-5">
    <!--Titre-->
     <header class="pb-6 flex w-full justify-content-center">
-      <h2 class="text-center">Création d'un compte familiale</h2>
+      <div>
+        <h2 class="m-2 text-cyan-500 text-center">Création d'un compte familial</h2>
+         <!--Redirection-->
+        <div class="flex">
+          <app-link (click)="redirectToLoginPage()" linkMessage="J'ai déjà un compte"></app-link>
+        </div>
+      </div>
     </header>
+
   <form [formGroup]="familyFb" (submit)="createFamilyAccount()">
-    <div class="p-2">
+    <!-- Nom de famille-->
+    <div class="h-6rem p-2">
       <label for="familyName">Nom de famille</label>
-      <input formControlName="familyName" id="familyName" placeholder="Le nom de famille" type="text" pInputText fluid/>
+      <input [invalid]="familyFb.get('familyName')?.invalid && familyFb.get('familyName')?.touched" formControlName="familyName" id="familyName" placeholder="Le nom de famille" type="text" pInputText fluid/>
+      @if(familyFb.get('familyName')?.invalid && familyFb.get('familyName')?.touched) {
+        <p-message class="p-1" severity="error" size="small" variant="simple">Le nom de famille est obligatoire</p-message>
+      }
     </div>
 
-    <div class="p-2">
+    <!-- Le prénom -->
+    <div class="h-6rem p-2">
       <label for="parentName">Votre Prénom</label>
-      <input id="parentName"  formControlName="parentName" placeholder="Votre prénom" type="text" pInputText fluid/>
+      <input id="parentName" [invalid]="familyFb.get('parentName')?.invalid && familyFb.get('parentName')?.touched" formControlName="parentName" placeholder="Votre prénom" type="text" pInputText fluid/>
+        @if(familyFb.get('parentName')?.invalid && familyFb.get('parentName')?.touched) {
+          <p-message class="p-1" severity="error" size="small" variant="simple">Le prénom est obligatoire</p-message>
+        }
     </div>
 
-    <div class="p-2">
+    <!-- Email-->
+    <div class="h-6rem p-2">
       <label for="email">Email</label>
-      <input id="email"  formControlName="email" placeholder="Email" type="email" pInputText fluid/>
+      <input id="email" [invalid]="familyFb.get('email')?.invalid && familyFb.get('email')?.touched" formControlName="email" placeholder="Email" type="email" pInputText fluid/>
+      @if(familyFb.get('email')?.invalid && familyFb.get('email')?.touched) {
+        <p-message class="p-1" severity="error" size="small" variant="simple">L'email est obligatoire</p-message>
+      }
     </div>
 
-    <div class="p-2">
+    <!-- Password-->
+    <div class="h-6rem  p-2">
       <label for="password">Mot de passe</label>
-      <input id="password"  formControlName="password" placeholder="Mot de passe" type="password" pInputText fluid/>
+      <input id="password" [invalid]="familyFb.get('password')?.invalid && familyFb.get('password')?.touched" formControlName="password" placeholder="Mot de passe" type="password" pInputText fluid/>
+      @if(familyFb.get('password')?.invalid && familyFb.get('password')?.touched) {
+        <p-message class="p-1" severity="error" size="small" variant="simple">Le mot de passe est obligatoire</p-message>
+      }
     </div>
 
       <p-button type="button" fluid (onClick)="createFamilyAccount()" severity="info">Créer le compte</p-button>

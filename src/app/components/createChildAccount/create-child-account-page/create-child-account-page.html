@@ -2,16 +2,31 @@
 <p-confirmdialog />
 
 <app-main-container>
-
-  <div class="p-5">
-    <!--Titre-->
-    <header class="pb-6 flex w-full justify-content-center">
-      <h2 class="text-center">Création d'un compte d'argent de poche</h2>
-    </header>
-
-    <!-- Création du nom -->
-    <app-create-child-name [(childName)]="childName"></app-create-child-name>
-
-    <p-button fluid (onClick)="createChildAccount()" [disabled]="!childName" severity="info">Créer un compte</p-button>
+     <!--Redirection-->
+  <div class="p-2 sticky ml-auto top-0">
+    <button (click)="redirectToFamilyAccount()" class="surface-0 shadow-4 border-circle w-2rem h-2rem cursor-pointer border-none">X</button>
   </div>
+
+  <div class="flex flex-1 justify-content-center align-items-center">
+    <div class="flex flex-1 flex flex-column">
+      <!--Titre-->
+      <header class="pb-6 flex w-full justify-content-center">
+        <h2 class="text-cyan-500 text-center">Nouvel argent de poche</h2>
+      </header>
+
+      <div class="h-full flex-1 p-2 flex flex-column justify-content-center align-items-center">
+        <!-- Création du nom -->
+        <app-create-child-name [(childName)]="childName"></app-create-child-name>
+
+        <!--Desciption-->
+        <div class="text-xs pb-5">
+          <p class="">Afin de créer un nouveau compte d'argent de poche</p>
+          <p>renseigner simplement le nom de votre enfant</p>
+        </div>
+
+        <p-button fluid (onClick)="createChildAccount()" [disabled]="!childName" severity="info">Créer un compte</p-button>
+      </div>
+    </div>
+  </div>
+
 </app-main-container>

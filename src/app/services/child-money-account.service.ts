@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, CreateChildAccountDto, CreatedChildAccountIdDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
+import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, CreateChildAccountDto, CreatedChildAccountIdDto, DesactivateChildAccountDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
 import { HttpClient } from '@angular/common/http';
 import apiUrl from '../../misc/api-url';
 
@@ -107,6 +107,20 @@ export class ChildMoneyAccountService {
   updateChildImage(updateChildImageDto: FormData): Observable<ChildAccountIdDto> {
     const url = apiUrl.updateChildAccountImage.url;
     return this._http.put<ChildAccountIdDto>(url, updateChildImageDto);
+  }
+
+    /**
+   * Désactivation d'un compte
+   *
+   * @param {DesactivateChildAccountDto} dto Les données sur le compte a désactiver
+   *
+   * @returns L'identifiant du compte d'argent de poche qui est mis a jour
+   */
+  desactivateChildAccount(dto: DesactivateChildAccountDto): Observable<ChildAccountIdDto> {
+        let url = apiUrl.desactivateChildAccount.url
+    .replace('{parentId}', dto.parentId)
+    .replace('{childAccountId}', dto.childAccountId);
+    return this._http.delete<ChildAccountIdDto>(url);
   }
 
 }

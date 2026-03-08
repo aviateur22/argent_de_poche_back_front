@@ -1,6 +1,9 @@
 import { environment } from "../environment/environment";
 
 export default {
+  login: {
+    url: `${environment.api_base}/auth/login-to-family-account`
+  },
   loadFamilyChildAccounts: {
     url: `${environment.api_base}/family-accounts/parent/{parentId}/load-family-child-accounts`
   },
@@ -30,5 +33,9 @@ export default {
   },
   createChildAccount: {
     url: `${environment.api_base}/child-accounts/create-child-account`
+  },
+  desactivateChildAccount: {
+    url: `${environment.api_base}/child-accounts/parent/{parentId}/child-account/{childAccountId}/desactivate-child-account`
   }
+
 }

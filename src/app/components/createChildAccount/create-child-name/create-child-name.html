@@ -1,3 +1,4 @@
-    <div class="p-2">
-      <input (ngModelChange)="onNameChange($event)" [ngModel]="childName" type="text" pInputText fluid/>
+    <div class="h-6rem p-2">
+      <label class="p-2" for="email">Le prénom</label>
+      <input placeholder="Toto" (ngModelChange)="onNameChange($event)" [ngModel]="childName" type="text" pInputText fluid/>
     </div>

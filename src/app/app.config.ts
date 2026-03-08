@@ -13,9 +13,10 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { FeatureKey } from './store/selector';
 import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
-import { LOCALE_ID } from '@angular/core';
+import { LOCALE_ID, isDevMode } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { httpInterceptor } from './interceptor/http.interceptor';
+import { provideServiceWorker } from '@angular/service-worker';
 
 export function initializeApp(devService: DevService) {
   return () => devService.loadFictiveParent();
@@ -26,12 +27,6 @@ export const appConfig: ApplicationConfig = {
     NgOptimizedImage,
     provideHttpClient(withInterceptors([httpInterceptor])),
     { provide: LOCALE_ID, useValue: 'fr-FR' },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp,
-      deps: [DevService],
-      multi: true
-    },
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     providePrimeNG({
@@ -47,6 +42,12 @@ export const appConfig: ApplicationConfig = {
       logOnly: false,
     }),
     MessageService,
-    ConfirmationService
+    ConfirmationService, provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          })
   ]
 };

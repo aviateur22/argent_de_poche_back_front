@@ -1,0 +1,6 @@
+.background--image {
+  background-image: url(../../../../../public/images/accueil.png);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

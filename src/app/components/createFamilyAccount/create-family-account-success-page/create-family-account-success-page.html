@@ -1,0 +1,22 @@
+<app-main-container>
+ <div class="p-5 flex flex-1 justify-content-center align-items-center">
+    <div class="flex flex-1 flex flex-column">
+      <!--Titre-->
+       <header class="S border-round-md p-2 bg-white">
+         <h2 class="text-cyan-500 text-center">Création compte du compte familiale</h2>
+       </header>
+       <div class="h-full flex flex-column p-2 flex justify-content-center align-items-center">
+          <!--Message-->
+          <p>Féliciation votre compte familial est créé</p>
+          <!--Redirection-->
+          <div class="flex p-2">
+            <app-link (click)="redirectToLoginPage()" linkMessage="Me connecter à mon compte"></app-link>
+          </div>
+       </div>
+       <!--Image de fond-->
+       <div class="h-full h-20rem background--image">
+       </div>
+    </div>
+  </div>
+</app-main-container>
+

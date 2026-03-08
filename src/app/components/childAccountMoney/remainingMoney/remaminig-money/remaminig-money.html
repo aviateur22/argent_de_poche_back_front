@@ -1,0 +1,35 @@
+<div class="p-3 w-full flex justify-content-center align-items-center
+ flex-column">
+  <!-- Argent de poche initial-->
+  <div class="grid">
+    <div class="col-9">
+      <div class="flex h-full flex-1 text-center align-items-center">
+        <p>Argent de poche initial:</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <div [class.animate]="isInitialMoneyUpdate()">
+        <p class="p-2 font-bold">
+          {{childMoneyAccount.moneyAtPeriodStart | currency: 'EUR'}}
+        </p>
+    </div>
+    </div>
+  </div>
+
+  <!--Argent depoche restant-->
+  <div class="grid">
+    <div class="col-9">
+      <div class="flex h-full flex-1 text-center align-items-center">
+        <p>Argent de poche restant:</p>
+      </div>
+    </div>
+    <div class="col-3">
+      <div [class.animate]="isRemainingMoneyUpdate()">
+        <p class="p-2 remaining--color font-bold">
+          {{childMoneyAccount.remainingMoney  | currency: 'EUR' }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

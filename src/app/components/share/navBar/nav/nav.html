@@ -1,0 +1,28 @@
+<nav class="w-full flex justify-content-center z-5">
+  <div class="p-5 m-width-1024 navbar--height fixed w-full z-2 background--color">
+    <div class="flex flex-1 h-full w-full align-items-center justify-content-between">
+      <div class="p-1 flex w-full align-items-center justify-content-between">
+        <!--Logo Titre-->
+        <app-title></app-title>
+
+        <div class="flex">
+          <!-- Bouton theme selectore-->
+          @if(parent$ | async; as parent) {
+            @if(parent.parentName) {
+              <app-parent></app-parent>
+
+              <!-- Button quitter-->
+              <div class="pl-1">
+                <app-logout></app-logout>
+              </div>
+            }
+          }
+        </div>
+      </div>
+      <!-- Boutton quitter-->
+      <div>
+        <app-theme-selector></app-theme-selector>
+      </div>
+    </div>
+  </div>
+</nav>

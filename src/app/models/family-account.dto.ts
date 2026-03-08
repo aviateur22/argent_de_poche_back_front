@@ -11,7 +11,6 @@ export interface LoadFamilyAccountDto {
  */
 export interface FamilyAccountDto {
   familyAccountId: string,
-  familyName: string,
   childs: FamilyChildAccountDto[]
 }
 
