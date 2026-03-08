@@ -23,8 +23,5 @@ npm run moe_href
 ### Build en MOE sans context
 npm run moe
 
-## Build MOE
-ng build --configuration=moe
-
 ## Build PROD
 ng build --configuration=production
