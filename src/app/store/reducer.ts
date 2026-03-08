@@ -46,6 +46,12 @@ export const initialState: ApplicationState = {
 export const applicationReducers  = createReducer(
   initialState,
   on(actions.logoutAction, () => initialState),
+  on(actions.refreshParentAction, (state, { parentName, familyName }) => ({
+    ...state, parent: {
+      parentName: parentName,
+      familyName: familyName
+    }
+  })),
   on(actions.loginAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
@@ -108,12 +114,6 @@ export const applicationReducers  = createReducer(
       isSuccess: false
     }
   })),
-  on(actions.loadChildAccountAction, state => ({
-    ...state, requestStatus: {
-      isLoading: true,
-      isSuccess: false
-    }
-  })),
   on(actions.refreshChildAccountAction, state => ({
     ...state, requestStatus: {
       isLoading: true,
@@ -144,6 +144,12 @@ export const applicationReducers  = createReducer(
       isSuccess: false
     }
   })),
+  on(actions.loadChildAccountAction, state => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
   on(actions.loadChildAccountSuccessAction, (state, {childAccountMoneyDto}) => ({
     ...state, requestStatus: {
       isLoading: false,
@@ -167,6 +173,13 @@ export const applicationReducers  = createReducer(
       isLoading: false,
       isSuccess: false
     }
+  })),
+  on(actions.resetChildAccountAction, (state) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    },
+    childMoneyAccount: initialState.childMoneyAccount
   })),
   on(actions.updateChildNameFailedAction, state => ({
     ...state, requestStatus: {

@@ -1,0 +1,18 @@
+<!--Composant d'aide-->
+@if(isHelperInformationVisible()) {
+  <div class="absolute p-5  left-0 bottom-0 w-full" animate.enter="enter-animation">
+    <div class="relative surface-0 border-round-md w-full shadow-6">
+      <!--Boutton de fermeture-->
+      <div class="absolute right-0 top-0 p-2">
+        <button (click)="close()" class="blue-50 shadow-4 border-circle w-2rem h-2rem cursor-pointer border-none">X</button>
+      </div>
+      <div class="flex align-items-center text-center flex-column sm:flex-row">
+        <!--Icone animé-->
+        <app-icon-animation class="p-2"></app-icon-animation>
+
+        <!--Message d'aide-->
+        <p class="p-3 text-sm font-semibold text-orange-500">Modifier les paramétres de l'argent de poche en cliquant sur la photo de profil</p>
+      </div>
+    </div>
+  </div>
+}

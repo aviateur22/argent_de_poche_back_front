@@ -1,0 +1,110 @@
+.svg--container {
+  padding: 5px;
+  border-radius: 50%;
+ width: 65px;       /* largeur de ta div */
+  height: 65px;      /* hauteur de ta div */
+  overflow: hidden;   /* empêche l'image de dépasser */
+  position: relative; /* pour gérer positionnement si besoin */
+  border: 1px solid #ccc; /* op*/
+}
+
+svg {
+   width: 100%;
+  height: 100%;
+}
+
+#bras-droit {
+  transform-origin: center ;
+  animation: bras-droit 15s infinite ease-in-out;
+}
+
+@keyframes bras-droit {
+  0%   { transform: rotate(10deg); }
+  5%  { transform: rotate(35deg); }
+  10%  { transform: rotate(15deg); }
+  15%  { transform: rotate(35deg); }
+  20% { transform: rotate(10deg); }
+  25%  { transform: rotate(35deg); }
+  30%  { transform: rotate(15deg); }
+  35%  { transform: rotate(35deg); }
+  40% { transform: rotate(10deg); }
+  45%  { transform: rotate(35deg); }
+  50%  { transform: rotate(15deg); }
+  55%  { transform: rotate(35deg); }
+  60%  { transform: rotate(10deg); }
+  65%  { transform: rotate(35deg); }
+  70%  { transform: rotate(10deg); }
+  75%  { transform: rotate(10deg); }
+  100% { transform: rotate(10deg); }
+}
+
+#bras-gauche {
+  transform-origin: center ;
+  animation: bras-gauche 15s infinite ease-in-out;
+}
+
+@keyframes bras-gauche {
+  0% { transform: rotate(-10deg); }
+  20% { transform: rotate(-10deg); }
+  25% { transform: rotate(-30deg); }
+  30% { transform: rotate(-15deg); }
+  35% { transform: rotate(-30deg); }
+  40% { transform: rotate(-10deg); }
+  45%{ transform: rotate(-30deg); }
+  50%{ transform: rotate(-10deg); }
+  55%{ transform: rotate(-30deg); }
+  60%{ transform: rotate(-10deg); }
+  65% { transform: rotate(-35deg); }
+  70% { transform: rotate(-10deg); }
+  75% { transform: rotate(-30deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+#oeil-droit {
+  transform-origin: center center ;
+  animation: oeil 2s infinite ease-in-out;
+}
+
+#oeil-gauche {
+  transform-origin: center center ;
+  animation: oeil 2s infinite ease-in-out;
+}
+@keyframes oeil {
+  0%   { transform: translateX(0px); }
+  25%  { transform: translateX(-6px); }
+  50%  { transform: translateX(6px); }
+  75%  { transform: translateX(-6px); }
+  100% { transform: translateX(0px); }
+}
+
+#jambe-droite {
+  transform-origin: top center;
+  animation: marche  0.8s 6 ease-in-out;
+  animation-delay: -0.4s
+}
+
+#jambe-gauche {
+  transform-origin: top;
+  animation: marche 0.8s 6 ease-in-out;
+}
+
+@keyframes marche {
+ 0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+#paupiere {
+  transform-origin: 513px 280px;
+  transform-box: fill-box;
+ animation: cligner 15s infinite ease-in-out;
+}
+
+@keyframes cligner {
+  0%  { transform: translateY(-35px); opacity: 0; }
+  2.5%  { transform: translateY(0px); opacity: 1 ; }
+  5%  { transform: translateY(-35px); opacity: 0; }
+  7.5%  { transform: translateY(0px); opacity: 1 ; }
+  10% { transform: translateY(-35px); opacity: 0; }
+  100% { transform: translateY(-35px); opacity: 0; }
+}

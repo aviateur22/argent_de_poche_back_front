@@ -57,7 +57,7 @@ export class ParentService {
    * @returns {Parent} Le parent authentifié ou null si pas de données
    *
    */
-  private getAuthenticatedParent(): Parent | null {
+  public getAuthenticatedParent(): Parent | null {
     try {
       const parentFromStorage = localStorage.getItem(APP_CONSTANT.ACTIVE_PARENT);
 

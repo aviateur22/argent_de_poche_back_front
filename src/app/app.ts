@@ -12,6 +12,7 @@ import { select, Store } from '@ngrx/store';
 import { isDisplayConfettiAnimationSelector } from './store/selector';
 import { isDisplayConfettiAnimationAction } from './store/actions';
 import { AsyncPipe } from '@angular/common';
+import { RestoreService } from './services/restore.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class App implements OnInit, OnDestroy {
 
   private _store = inject(Store);
   private _router = inject(Router);
+  private _restoreService = inject(RestoreService);
   private _destroy$ = new Subject<void>();
 
   // Récupération de l'état de visibilité de la chute des piéces
@@ -39,6 +41,8 @@ export class App implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+   this._restoreService.refresh();
+
    this._router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       switchMap(() => {

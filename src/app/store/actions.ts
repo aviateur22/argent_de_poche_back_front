@@ -19,6 +19,8 @@ export const loadChildAccountAction = createAction("[loadChildAccountAction] loa
 export const loadChildAccountSuccessAction = createAction("[loadChildAccountSuccessAction] load Child Account Success Action", props<{ childAccountMoneyDto: ChildAccountDto }>());
 export const loadChildAccountFailedAction = createAction("[loadChildAccountFailedAction] load Child Account Failed Action");
 
+export const resetChildAccountAction = createAction("[resetChildAccountAction] resetChildAccountAction");
+
 export const refreshChildAccountAction = createAction("[refreshChildAccountAction] refresh Child AccountAction", props<{ parentId: string, childAccountId: string }>());
 export const refreshChildAccountSuccessAction = createAction("[refresh Child Account Success Action] refreshChildAccountSuccessAction", props<{ childAccountMoneyDto: ChildAccountDto }>());
 export const refreshChildAccountFailedAction = createAction("[refresh Child Account Failed Action] refreshChildAccountFailedAction");
@@ -81,4 +83,9 @@ export const isDisplayCoinAnimationAction = createAction('[displayCoinAnimationA
  * Action liée à l'animation des confetti
  */
 export const isDisplayConfettiAnimationAction = createAction('[DisplayConfettiAnimationAction] Display Confetti Animation Action', props<{ isActive: boolean }>())
+
+/**
+ * Rechargement des données du parent au refresh
+ */
+export const refreshParentAction = createAction('[refreshParentAction] refresh Parent Action', props<{ parentName: string, familyName: string }>())
 

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import pageUrl from '../../../../../misc/page-url';
 
 @Component({
   selector: 'app-parent',
@@ -8,4 +10,12 @@ import { Component } from '@angular/core';
 })
 export class Parent {
 
+  private _router = inject(Router);
+
+  /**
+   * Rdirige vers la page d'accueil du compte
+   */
+  redirecToHomePage() {
+    this._router.navigate([ pageUrl.familyAccount.url]);
+  }
 }

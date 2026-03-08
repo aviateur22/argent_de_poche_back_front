@@ -6,11 +6,12 @@ import pageUrl from '../../../../../misc/page-url';
 import { ChildImage } from '../child-image/child-image';
 import { ParentService } from '../../../../services/parent.service';
 import apiUrl from '../../../../../misc/api-url';
+import { HelperInformation } from "../helper-information/helper-information";
 
 
 @Component({
   selector: 'app-child-information',
-  imports: [CapitalizePipe, ChildImage],
+  imports: [CapitalizePipe, ChildImage, HelperInformation],
   templateUrl: './child-information.html',
   styleUrl: './child-information.css',
 })
