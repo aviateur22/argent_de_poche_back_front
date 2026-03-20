@@ -53,17 +53,19 @@ export class ParentService {
   /**
    * Renvoie une instance du parent authentifié
    *
+   * @param {boolean} redirectIfInvalid
    *
    * @returns {Parent} Le parent authentifié ou null si pas de données
    *
    */
-  public getAuthenticatedParent(): Parent | null {
+  public getAuthenticatedParent(redirectIfInvalid: boolean = true): Parent | null {
     try {
       const parentFromStorage = localStorage.getItem(APP_CONSTANT.ACTIVE_PARENT);
 
       // Storage vide
       if(!parentFromStorage) {
-        this.manageSessionExpired();
+        if (redirectIfInvalid)
+          this.manageSessionExpired();
         return null;
       }
 
@@ -71,14 +73,16 @@ export class ParentService {
 
       // Date de validitée session expirée
       if(new Date(parent.sessionValidUntil).getTime() < Date.now()) {
-        this.manageSessionExpired();
+        if (redirectIfInvalid)
+          this.manageSessionExpired();
         return null;
       }
 
       return parent;
 
     } catch (error) {
-      this.manageSessionExpired();
+      if (redirectIfInvalid)
+        this.manageSessionExpired();
       return null;
     }
   }

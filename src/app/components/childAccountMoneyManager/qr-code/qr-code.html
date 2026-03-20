@@ -1,0 +1,41 @@
+<app-manager-component-container [title]="title">
+  <div>
+    <!--Le QR code-->
+    <div id="print">
+      <div class="full flex justify-content-center">
+          @if(qrCodeImageUrl){
+            <!--Image selectionné-->
+              <div class="image--wrapper">
+                <img
+                [src]="qrCodeImageUrl"
+                class="image"
+                alt="Le QR code pour accéder au compte">
+              </div>
+            } @else {
+              <!-- Image de Chargement-->
+              <div class="image--wrapper">
+                <img
+                  [src]="placeholder"
+                  class="image"
+                  alt="une image de chargement">
+              </div>
+            }
+      </div>
+      <div class="text-center">
+        <p class="font-medium">{{childMoneyAccount.childName}}</p>
+      </div>
+    </div>
+    <!--Imprimer-->
+    <div class="p-2 flex justify-content-center align-items-center">
+      <p-button (click)="printQrCode()" severity="info"  label="Imprimer" icon="pi pi-print" iconPos="right" />
+    </div>
+    <!--Description-->
+  <div class="w-full font-semibold flex align-items-center justify-content-center">
+    <div class="p-2 text-xs text-orange-500 w-9">
+      <p class="p-1"> Imprimer ce QR code afin de permettre aux enfants de suivre leur agrent de poche. </p>
+      <p class="p-1"> Sur cette page les enfants ne pourront pas la possibilité de modifier les données</p>
+    </div>
+  </div>
+
+  </div>
+</app-manager-component-container>

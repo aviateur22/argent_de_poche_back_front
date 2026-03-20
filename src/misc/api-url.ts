@@ -36,6 +36,12 @@ export default {
   },
   desactivateChildAccount: {
     url: `${environment.api_base}/child-accounts/parent/{parentId}/child-account/{childAccountId}/desactivate-child-account`
+  },
+  streamQrCodeOfChildAccount: {
+    url: `${environment.api_base}/child-accounts/stream/parent/{parentId}/child-account/{childAccountId}/qr-code`
+  },
+  displayChildAccountInfo: {
+    url: `${environment.api_base}/auth/child-accounts/display/child-account/{childAccountId}/info`
   }
 
 }

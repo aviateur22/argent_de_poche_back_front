@@ -7,7 +7,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { ParentService } from '../../../services/parent.service';
-import { Store } from '@ngrx/store';
 import { ManagerChildName } from "../manager-child-name/manager-child-name";
 import { ManagerInitialMoney } from "../manager-initial-money/manager-initial-money";
 import { ManagerRemainingMoney } from "../manager-remaining-money/manager-remaining-money";
@@ -15,11 +14,12 @@ import { ManagerChildImage } from "../manager-child-image/manager-child-image";
 import { Router } from '@angular/router';
 import pageUrl from '../../../../misc/page-url';
 import { DesactivateChildAccount } from "../desactivate-child-account/desactivate-child-account";
+import { QrCode } from "../qr-code/qr-code";
 
 
 @Component({
   selector: 'app-manage-child-account',
-  imports: [MainContainer, InputNumberModule, InputTextModule, ButtonModule, FormsModule, ConfirmDialogModule, ManagerChildName, ManagerInitialMoney, ManagerRemainingMoney, ManagerChildImage, DesactivateChildAccount],
+  imports: [MainContainer, InputNumberModule, InputTextModule, ButtonModule, FormsModule, ConfirmDialogModule, ManagerChildName, ManagerInitialMoney, ManagerRemainingMoney, ManagerChildImage, DesactivateChildAccount, QrCode],
   templateUrl: './manage-child-account-page.html',
   styleUrl: './manage-child-account-page.css',
 })

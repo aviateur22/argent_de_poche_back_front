@@ -485,6 +485,42 @@ export class Effect {
   );
 
   /**
+   * Affichage des données d'un compte d'argent de poche
+   * Ces données sont accessible sans authentification
+   */
+  displayChildAccountInfo$ = createEffect(() =>
+       this._actions$.pipe(
+      ofType(actions.displayChildAccountInfoAction),
+      mergeMap(({ childAccountId }) =>
+        this._childMoneyService.displayChildAccountInfo(childAccountId).pipe(
+          mergeMap(response => from([
+             actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: false,
+                  message: response.message
+                }
+              }),
+              actions.displayChildAccountInfoSuccessAction({ displayChildAccountInfoDto: response })
+          ])),
+            catchError(error =>
+            of(
+              actions.desactivateChildAccountFailedAction(),
+              actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: true,
+                  message: error.error.errorMessage
+                }
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  /**
    * Redirection vers la page de succés quand le compte est désactivé
    */
  desactivateChildAccountSuccess$ = createEffect(() =>

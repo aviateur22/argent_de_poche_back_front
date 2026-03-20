@@ -15,4 +15,11 @@
   </div>
 
   <p-button fluid (onClick)="updateInitialMoney()" [disabled]="newMoneyAtPeriodStart === undefined || newMoneyAtPeriodStart === 0" severity="info">Metttre à jour</p-button>
+  <!--Description-->
+  <div class="w-full font-semibold flex align-items-center justify-content-center">
+    <div class="p-2 text-xs text-orange-500 w-9">
+      <p class="p-1"> Il s'agit de l'argent de poche disponible au début d'une nouvelle semaine ou d'un nouveau mois. </p>
+      <p class="p-1"> On ne pourra jamais dépasser cette quantité durant la semaine</p>
+    </div>
+  </div>
 </app-manager-component-container>

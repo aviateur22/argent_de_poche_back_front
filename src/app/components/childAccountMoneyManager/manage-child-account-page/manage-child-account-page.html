@@ -21,6 +21,9 @@
     <!-- Reinitilasation argent de poche restant-->
     <app-manager-remaining-money [parentId]="parentId" [childMoneyAccount]="childMoneyAccount"  title="Reinitialisation argent de poche restant"></app-manager-remaining-money>
 
+    <!--Affichage QR code-->
+    <app-qr-code [childMoneyAccount]="childMoneyAccount" [parentId]="parentId" title="Le QR code pour accéder au compte"></app-qr-code>
+
     <!-- Désactivation du compte-->
     <app-desactivate-child-account [parentId]="parentId" [childMoneyAccount]="childMoneyAccount"  title="Désactivation du compte d'argent de poche"></app-desactivate-child-account>
 

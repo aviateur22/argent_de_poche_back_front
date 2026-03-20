@@ -1,0 +1,28 @@
+<app-main-container>
+  <!--Redirection-->
+  <div class="p-2 sticky ml-auto top-0">
+    <button (click)="redirect()" class="blue-50 shadow-4 border-circle w-2rem h-2rem cursor-pointer border-none">X</button>
+  </div>
+
+  <!-- wrapper contenant les données de childMoneyAccount -->
+  <app-child-account-wrapper>
+
+    <ng-template let-childMoneyAccount>
+      <div class="flex flex-column align-items-center">
+
+        <!-- Date du jour -->
+        <app-actual-date [childMoneyAccount]=childMoneyAccount></app-actual-date>
+
+        <!-- Information nom + photo de l'enfant -->
+        <app-display-child-information class="w-full flex justify-centent-center align-items-center" [childMoneyAccount]=childMoneyAccount></app-display-child-information>
+
+        <!-- La semaine -->
+        <app-week-information [childMoneyAccount]=childMoneyAccount></app-week-information>
+
+        <!-- Argent de poche-->
+        <app-remaminig-money [childMoneyAccount]=childMoneyAccount class="w-full"></app-remaminig-money>
+      </div>
+    </ng-template>
+  </app-child-account-wrapper>
+</app-main-container>
+

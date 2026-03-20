@@ -6,5 +6,11 @@
     </div>
 
   <p-button fluid (onClick)="desactivateAccount()" [disabled]="confirmChildName !== childMoneyAccount.childName || confirmChildName === ''"  severity="danger">Désactiver</p-button>
-
+<!--Description-->
+  <div class="w-full font-semibold flex align-items-center justify-content-center">
+    <div class="p-2 text-xs text-orange-500 w-9">
+      <p class="p-1"> Le compte d'argent de poche sera désactivé et inacessible. </p>
+      <p class="p-1"> Cette action n'est pas reversible</p>
+    </div>
+  </div>
 </app-manager-component-container>

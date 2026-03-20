@@ -11,7 +11,7 @@ export default {
   },
   notFound: {
     url: 'demande/page-inexistante',
-    title:  `${environment.main_page_title} | Bienvenue`
+    title:  `${environment.main_page_title} | Pas de contenu`
   },
   childAccount: {
     url: 'compte/enfant/:childAccountId/detail',
@@ -39,6 +39,11 @@ export default {
   },
   desactivateChildAccountSuccess: {
    url: 'compte/enfant/success-desactivation',
-  title:  `${environment.main_page_title} | Désactivation compte enfant`
+    title:  `${environment.main_page_title} | Désactivation compte enfant`
+  },
+  displayChildAccountInfo: {
+    url: 'compte/enfant/:childAccountId/info',
+    title:  `${environment.main_page_title} | Compte`
   }
+
 }

@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { FlashMessage } from "./model";
-import { AddMoneyMovementDto, ChildAccountDto, CreateChildAccountDto, DesactivateChildAccountDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from "../models/child-money.dto";
+import { AddMoneyMovementDto, ChildAccountDto, CreateChildAccountDto, DesactivateChildAccountDto, DisplayChildAccountInfoDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from "../models/child-money.dto";
 import { CreateFamilyAccountDto, FamilyAccountDto, FamilyChildAccountDto, LoadFamilyAccountDto } from "../models/family-account.dto";
 import { LoginDto, LoginResponseDto } from "../models/auth.dto";
 
@@ -52,6 +52,15 @@ export const createChildFailedAction = createAction("[createChildFailedAction] c
 export const desactivateChildAccountAction = createAction("[desactivateChildAccountAction]", props<{ dto: DesactivateChildAccountDto }>());
 export const desactivateChildAccountSuccessAction = createAction("[desactivateChildAccountSuccessAction] desactivate Child Account Success Action");
 export const desactivateChildAccountFailedAction = createAction("[desactivateChildAccountFailedAction] desactivate Child Account Failed Action");
+
+export const displayChildAccountInfoAction = createAction("[displayChildAccountInfoAction] display Child Account Info Action", props<{ childAccountId: string }>());
+export const displayChildAccountInfoSuccessAction = createAction("[displayChildAccountInfoSuccessAction] displayChildAccountInfoSuccessAction", props<{ displayChildAccountInfoDto: DisplayChildAccountInfoDto }>());
+export const displayChildAccountInfoFailedAction = createAction("[displayChildAccountInfoFailedAction] displayChildAccountInfoFailedAction");
+
+export const streamQrCodeOfChildAccountAction = createAction("[streamQrCodeOfChildAccountAction] streamQrCodeOfChildAccountAction", props<{ parentId: string, childAccountId: string }>());
+export const streamQrCodeOfChildAccountSuccessAction = createAction("[streamQrCodeOfChildAccountSuccessAction] streamQrCodeOfChildAccountSuccessAction");
+export const streamQrCodeOfChildAccountFailedAction = createAction("[streamQrCodeOfChildAccountFailedAction] streamQrCodeOfChildAccountFailedAction");
+
 
 /**
  * Action liée a l'affichage de l'argent restant quand il est modifié

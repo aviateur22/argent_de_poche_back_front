@@ -17,7 +17,8 @@ export class RestoreService {
    * Refresh du state parent a chaque rchargement de page
    */
   refresh(): void {
-    const parent = this._parentService.getAuthenticatedParent();
+    const authorizeRedirect = false;
+    const parent = this._parentService.getAuthenticatedParent(authorizeRedirect);
 
     if (!parent)
       return;

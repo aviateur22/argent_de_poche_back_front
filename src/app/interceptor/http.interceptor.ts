@@ -34,7 +34,6 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
           break;
         }
         default: {
-
           break;
         }
       }

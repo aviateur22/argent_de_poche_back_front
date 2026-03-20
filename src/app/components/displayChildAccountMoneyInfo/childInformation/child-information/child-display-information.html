@@ -1,13 +1,7 @@
 <div class="relative w-full flex flex-column justify-content-center  border-round-lg shadow-6 p-5 m-5">
-  <!-- L'image-->
-  <app-child-image class="cursor-pointer" [childImageUrl]="childImageUrl" (click)="redirectToManageChild()" ></app-child-image>
 
   <!-- Le nom de l'enfant -->
   <div class="fadeinleft animation-duration-1000 animation-iteration-1 mt-4 border-round-sm w-full text-center flex flex-column align-content-center">
     <p class="p-2 font-semibold">{{ childMoneyAccount.childName | capitalize }}</p>
   </div>
-
-  <!--Message d'aide pour modifier les paramtres-->
-  <app-helper-information></app-helper-information>
-
 </div>

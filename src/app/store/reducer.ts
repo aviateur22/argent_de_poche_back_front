@@ -262,7 +262,36 @@ export const applicationReducers  = createReducer(
       isSuccess: true
     }
   })),
-   on(actions.desactivateChildAccountFailedAction, (state ) => ({
+  on(actions.desactivateChildAccountFailedAction, (state ) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
+  on(actions.displayChildAccountInfoAction, (state ) => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.displayChildAccountInfoSuccessAction, (state, { displayChildAccountInfoDto } ) => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    }, childMoneyAccount: {
+      childMoneyAccountId: displayChildAccountInfoDto.childAccountIdentity,
+      childName: displayChildAccountInfoDto.childName,
+      remainingMoney: displayChildAccountInfoDto.remainingMoney,
+      moneyAtPeriodStart: displayChildAccountInfoDto.moneyAtPeriodStart,
+      periodName: "",
+      startPeriodDate: displayChildAccountInfoDto.startPeriodDate,
+      endPeriodDate: displayChildAccountInfoDto.endPeriodDate,
+      actualDate: displayChildAccountInfoDto.actualDate,
+      availableReasonMovements: [],
+      childImageName: ""
+    }
+  })),
+  on(actions.displayChildAccountInfoFailedAction, (state ) => ({
     ...state, requestStatus: {
       isLoading: false,
       isSuccess: false

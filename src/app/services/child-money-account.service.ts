@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, CreateChildAccountDto, CreatedChildAccountIdDto, DesactivateChildAccountDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
+import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, CreateChildAccountDto, CreatedChildAccountIdDto, DesactivateChildAccountDto, DisplayChildAccountInfoDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
 import { HttpClient } from '@angular/common/http';
 import apiUrl from '../../misc/api-url';
 
@@ -121,6 +121,32 @@ export class ChildMoneyAccountService {
     .replace('{parentId}', dto.parentId)
     .replace('{childAccountId}', dto.childAccountId);
     return this._http.delete<ChildAccountIdDto>(url);
+  }
+
+  /**
+   * Stream une image d'un QR code avec l'url d'accés du compte de l'enfant
+   *
+   * @param parentId  L'identifiant du parant
+   * @param childAccountId L'identifiant du compte
+   */
+  streamQrCodeOfChildAccount(parentId: string, childAccountId: string):Observable<Blob> {
+    var url = apiUrl.streamQrCodeOfChildAccount.url
+    .replace('{childAccountId}', childAccountId)
+    .replace('{parentId}', parentId);
+
+    return this._http.get(url) as Observable<Blob>;
+  }
+
+  /**
+   * Récupération des infos d'un compte d'argent poche accessible sans authentification.
+   *
+   * @param childAccountId  L'identifiant du compte
+   *
+   * @returns Les données du compte
+   */
+  displayChildAccountInfo(childAccountId: string): Observable<DisplayChildAccountInfoDto> {
+    let url = apiUrl.displayChildAccountInfo.url.replace('{childAccountId}', childAccountId);
+    return this._http.get<DisplayChildAccountInfoDto>(url);
   }
 
 }

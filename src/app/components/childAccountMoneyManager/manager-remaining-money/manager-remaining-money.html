@@ -3,4 +3,12 @@
       <p>{{ childMoneyAccount?.remainingMoney | currency: 'EUR'}}</p>
   </div>
   <p-button fluid (onClick)="reinitializeRemainingMoney()" severity="info"> Réinitialiser l'argent de poche restant </p-button>
+    <!--Description-->
+  <div class="w-full flex align-items-center justify-content-center">
+    <div class="p-2 font-semibold text-xs text-orange-500 w-9">
+      <p class="p-1"> Il s'agit de l'argent de poche restant disponible en fin semaine ou de mois. </p>
+      <p class="p-1"> L'argent de poche restant ne pourra jamais être inférieur à 0 €</p>
+      <p class="p-1"> En réinitialisant, l'argent de poche restant sera de {{childMoneyAccount?.moneyAtPeriodStart | currency: 'EUR'}}</p>
+    </div>
+  </div>
 </app-manager-component-container>
