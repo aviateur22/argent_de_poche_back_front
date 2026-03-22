@@ -50,7 +50,7 @@ export class FamilyChildAccount implements OnChanges {
     if(!childImageName || !childAccountId)
       return;
 
-    this.childImage$ = this._imageService.loadChildImageUrl(childImageName, childAccountId, this.parentId);
+    this.childImage$ = this._imageService.loadChildImage(childImageName, childAccountId, this.parentId);
   }
 
   /**

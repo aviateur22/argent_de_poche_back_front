@@ -38,6 +38,6 @@ export class ChildImage implements OnChanges {
     if(!this.childImageName || !childAccountId)
       return;
 
-    this.childImage$ = this._imageService.loadChildImageUrl(this.childImageName, childAccountId, parentId);
+    this.childImage$ = this._imageService.loadChildImage(this.childImageName, childAccountId, parentId);
   }
 }

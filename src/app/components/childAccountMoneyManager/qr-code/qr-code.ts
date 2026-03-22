@@ -1,13 +1,15 @@
 import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChildMoneyAccount } from '../../../store/model';
-import apiUrl from '../../../../misc/api-url';
 import { ParentService } from '../../../services/parent.service';
 import { ManagerComponentContainer } from "../manager-component-container/manager-component-container";
 import { ButtonModule } from 'primeng/button';
+import { ImageService } from '../../../services/image.service';
+import { Observable, of } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-qr-code',
-  imports: [ManagerComponentContainer, ButtonModule],
+  imports: [ManagerComponentContainer, ButtonModule, AsyncPipe],
   templateUrl: './qr-code.html',
   styleUrl: './qr-code.css',
 })
@@ -16,40 +18,38 @@ export class QrCode implements OnChanges {
   @Input() parentId!: string;
   @Input() title!: string;
 
-
-  private _parentService = inject(ParentService);
+    private _imageService = inject(ImageService);
 
   /**
    * Url permattant d'afficher l'image QR code
    * contenant l'URL d'accés du compte d'argnet de poche
    */
-  qrCodeImageUrl!: string
+  qrCodeImage$: Observable<string> = of('');
 
-     /**
-    * L'image de chargement
-    */
-  placeholder = "/images/cbasic60.svg";
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.loadChildImageUrl();
+    this.loadQrCodeImage();
   }
 
   /**
    * Chargement de l'url de l'image du compte
    */
-  loadChildImageUrl(): void {
+  loadQrCodeImage(): void {
+    const childAccountId = this.childMoneyAccount.childMoneyAccountId;
 
-    // Récupération de l'url d'accés a l'image
-    this.qrCodeImageUrl = apiUrl.streamQrCodeOfChildAccount.url
-      .replace('{parentId}', this.parentId)
-      .replace('{childAccountId}', this.childMoneyAccount.childMoneyAccountId);
+    // Si pas de données sur l'image
+    if(!childAccountId)
+      return;
+
+    this.qrCodeImage$ = this._imageService.loadQrCodeImage(childAccountId, this.parentId);
   }
 
   /**
    * Impressio du QR code
    */
   printQrCode() {
-const printContents = document.getElementById('print')?.innerHTML;
+  const printContents = document.getElementById('print')?.innerHTML;
+
   if (!printContents) {
     console.error("Aucun contenu à imprimer trouvé.");
     return;

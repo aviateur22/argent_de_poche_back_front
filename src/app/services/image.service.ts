@@ -17,8 +17,7 @@ export class ImageService {
   /**
    * Chargement de l'url de l'image du compte
    */
-  public loadChildImageUrl(childImageName: string, childAccountId: string, parentId: string): Observable<string> {
-    console.log(childImageName);
+  public loadChildImage(childImageName: string, childAccountId: string, parentId: string): Observable<string> {
 
     const dto: StreamChildAccountImageDto = {
       parentId,
@@ -27,6 +26,18 @@ export class ImageService {
     }
 
     return this._childAccountService.streamChildImage(dto)
+    .pipe(
+        map(blob => URL.createObjectURL(blob)),
+        startWith(this.placeholder)
+      );
+  }
+
+  /**
+   * Chargement de l'image du QR code
+   */
+  public loadQrCodeImage(childAccountId: string, parentId: string): Observable<string> {
+
+    return this._childAccountService.streamQrCodeOfChildAccount(parentId, childAccountId)
     .pipe(
         map(blob => URL.createObjectURL(blob)),
         startWith(this.placeholder)

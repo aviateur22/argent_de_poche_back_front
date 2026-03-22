@@ -3,21 +3,13 @@
     <!--Le QR code-->
     <div id="print">
       <div class="full flex justify-content-center">
-          @if(qrCodeImageUrl){
+          @if(qrCodeImage$ | async; as qrCodeImage){
             <!--Image selectionné-->
               <div class="image--wrapper">
                 <img
-                [src]="qrCodeImageUrl"
+                [src]="qrCodeImage"
                 class="image"
                 alt="Le QR code pour accéder au compte">
-              </div>
-            } @else {
-              <!-- Image de Chargement-->
-              <div class="image--wrapper">
-                <img
-                  [src]="placeholder"
-                  class="image"
-                  alt="une image de chargement">
               </div>
             }
       </div>

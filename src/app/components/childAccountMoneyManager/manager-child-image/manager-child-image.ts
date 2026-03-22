@@ -105,7 +105,7 @@ export class ManagerChildImage {
     if(!childImageName)
       return;
 
-    this.childImageUrl$ = this._imageService.loadChildImageUrl(childImageName, childAccountId, this.parentId);
+    this.childImageUrl$ = this._imageService.loadChildImage(childImageName, childAccountId, this.parentId);
   }
 
 }
