@@ -33,6 +33,12 @@ export interface ChildAccountDto {
   message: string;
 }
 
+export interface StreamChildAccountImageDto {
+  parentId: string;   // ID du compte enfant
+  childAccountId: string;          // ID de l'enfant
+  imageName: string;        // Nom de l'image de profil
+}
+
 export interface ReasonMovementDto {
   reasonName: string,
   reasonCode: string,

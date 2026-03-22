@@ -32,8 +32,6 @@ export class ManageChildAccountPage implements OnInit {
    * Ces données sont récupérées depuis le state de l'application
   */
   childMoneyAccount!: ChildMoneyAccount
-  childImageurl!: string
-
 
   /**
    * L'identifiant du parent
@@ -43,9 +41,6 @@ export class ManageChildAccountPage implements OnInit {
   ngOnInit(): void {
       // Récupération des données du compte d'argent
       this.childMoneyAccount = history.state.childMoneyAccount;
-
-      // Récupération de l'image du compte
-      this.childImageurl = history.state.childImageurl;
 
       // Récupération de l'identifiant du parent
       this.parentId = this._parentService.getParentId();

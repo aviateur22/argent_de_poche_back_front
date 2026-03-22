@@ -1,6 +1,6 @@
 <div class="flex w-full justify-content-center">
   <!--L'image du compte -->
-  @if(childImageUrl) {
+  @if(childImage$ | async; as childImageUrl) {
     <div class="image--wrapper">
       <img
         [ngSrc]="childImageUrl"
@@ -10,13 +10,5 @@
         priority
         alt="">
     </div>
-    } @else {
-      <!-- Image de Chargement-->
-      <div class="image--wrapper">
-        <img
-          [src]="placeholder"
-          class="image"
-          alt="une image de chargement">
-      </div>
     }
 </div>

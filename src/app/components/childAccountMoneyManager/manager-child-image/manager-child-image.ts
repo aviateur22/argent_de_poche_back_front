@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, SimpleChanges } from '@angular/core';
 import { ChildMoneyAccount } from '../../../store/model';
 import { ManagerComponentContainer } from "../manager-component-container/manager-component-container";
 import { FormsModule } from '@angular/forms';
@@ -6,13 +6,15 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
-import { NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
 import * as actions from '../../../store/actions';
 import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { ImageService } from '../../../services/image.service';
 
 @Component({
   selector: 'app-manager-child-image',
-  imports: [ManagerComponentContainer, InputNumberModule, InputTextModule, ButtonModule, FormsModule, ConfirmDialogModule, NgOptimizedImage],
+  imports: [AsyncPipe, ManagerComponentContainer, InputNumberModule, InputTextModule, ButtonModule, FormsModule, ConfirmDialogModule, NgOptimizedImage],
   templateUrl: './manager-child-image.html',
   styleUrl: './manager-child-image.css',
 })
@@ -22,11 +24,16 @@ export class ManagerChildImage {
   @Input() title!: string;
 
   private _store = inject(Store);
+  private _imageService = inject(ImageService);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadChildImageUrl();
+  }
 
   /**
    * URL de l'image du compte original
    */
-  @Input() childImageUrl!: string;
+  childImageUrl$: Observable<string> = of('');
 
   /**
    * URL de la nouvelle image sélectionnée
@@ -42,10 +49,10 @@ export class ManagerChildImage {
    */
   private _newSelectedImageFile: File | null = null;
 
-   /**
-    * L'image de chargement
-    */
-  placeholder = "/images/cbasic60.svg";
+  //  /**
+  //   * L'image de chargement
+  //   */
+  // placeholder = "/images/cbasic60.svg";
 
   /**
    * Mise à jour de la photo
@@ -85,6 +92,20 @@ export class ManagerChildImage {
 
     // Stocke l'image pour update
     this._newSelectedImageFile = file;
+  }
+
+  /**
+   * Chargement de l'url de l'image du compte
+   */
+  loadChildImageUrl(): void {
+    const childAccountId = this.childMoneyAccount.childMoneyAccountId;
+    const childImageName = this.childMoneyAccount.childImageName;
+
+    // Si pas de données sur l'image
+    if(!childImageName)
+      return;
+
+    this.childImageUrl$ = this._imageService.loadChildImageUrl(childImageName, childAccountId, this.parentId);
   }
 
 }

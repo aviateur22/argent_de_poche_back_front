@@ -174,6 +174,24 @@ export const applicationReducers  = createReducer(
       isSuccess: false
     }
   })),
+  on(actions.streamChildAccountImageAction, state => ({
+    ...state, requestStatus: {
+      isLoading: true,
+      isSuccess: false
+    }
+  })),
+  on(actions.streamChildAccountImageSuccessAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: true
+    }
+  })),
+  on(actions.streamChildAccountImageFailedAction, state => ({
+    ...state, requestStatus: {
+      isLoading: false,
+      isSuccess: false
+    }
+  })),
   on(actions.resetChildAccountAction, (state) => ({
     ...state, requestStatus: {
       isLoading: false,

@@ -12,7 +12,8 @@ export class RequestHeaderService {
   public addHeaders(request: HttpRequest<unknown>): HttpRequest<unknown> {
 
     // Url applé pour streamer un image
-    const streamUrl = '/stream/image/';
+    const streamUrl = '/stream/';
+
     let copyRequest = request;
 
     // Ajout du header Authorisation

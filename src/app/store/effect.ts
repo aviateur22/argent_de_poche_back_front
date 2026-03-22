@@ -165,6 +165,35 @@ export class Effect {
     )
   );
 
+   /**
+   * Stream de l'image d'un compte d'argent de poche
+   */
+  streamChildAccountImage$ = createEffect(() =>
+       this._actions$.pipe(
+      ofType(actions.streamChildAccountImageAction),
+      mergeMap(({ dto }) =>
+        this._childMoneyService.streamChildImage(dto).pipe(
+          mergeMap(response => from([
+              actions.streamChildAccountImageSuccessAction(),
+          ])),
+            catchError(error =>
+            of(
+              actions.streamChildAccountImageFailedAction(),
+              actions.displayMessageAction({
+                message: {
+                  title: "",
+                  isError: true,
+                  message: error.error.errorMessage
+                }
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+
 /**
  * Refresh des données du compte d'argent de poche
  */

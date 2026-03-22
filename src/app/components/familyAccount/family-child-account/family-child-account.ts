@@ -1,20 +1,22 @@
 import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FamilyChildAccountDto } from '../../../models/family-account.dto';
-import { NgOptimizedImage } from "@angular/common";
-import apiUrl from '../../../../misc/api-url';
+import { AsyncPipe, NgOptimizedImage } from "@angular/common";
 import { CapitalizePipe } from '../../../pipe/capitalize-pipe';
 import { Router } from '@angular/router';
 import pageUrl from '../../../../misc/page-url';
+import { Observable, of } from 'rxjs';
+import { ImageService } from '../../../services/image.service';
 
 @Component({
   selector: 'app-family-child-account',
-  imports: [NgOptimizedImage, CapitalizePipe],
+  imports: [NgOptimizedImage, CapitalizePipe, AsyncPipe],
   templateUrl: './family-child-account.html',
   styleUrl: './family-child-account.css',
 })
 export class FamilyChildAccount implements OnChanges {
 
   private _router = inject(Router);
+  private _imageService = inject(ImageService);
 
   /**
    * Les données sur un compte d'argent de poche
@@ -29,29 +31,26 @@ export class FamilyChildAccount implements OnChanges {
   */
   @Input() parentId!: string;
 
-  /**
-   * L'url d'accés à l'image du compte d'argent de poche
-   */
-  childImageUrl!: string;
-
-  /**
-   * L'image de chargement
-   */
-  placeholder = "/images/cbasic60.svg";
+  // L'image du compte qui sera chargé
+  childImage$: Observable<string> = of('');
 
   ngOnChanges(changes: SimpleChanges): void {
   if(this.childAccount && this.parentId)
     this.loadChildImage();
   }
 
-  /**
-   * Chargement de l'image du compte
+/**
+   * Chargement de l'url de l'image du compte
    */
-  loadChildImage():void {
-    this.childImageUrl = apiUrl.streamChildImage.url
-    .replace('{parentId}', this.parentId)
-    .replace('{childAccountId}', this.childAccount.childAccountId)
-    .replace('{imageName}', this.childAccount.imageRandomName);
+  loadChildImage(): void {
+    const childAccountId = this.childAccount.childAccountId;
+    const childImageName = this.childAccount.imageRandomName;
+
+    // Si pas de données sur l'image
+    if(!childImageName || !childAccountId)
+      return;
+
+    this.childImage$ = this._imageService.loadChildImageUrl(childImageName, childAccountId, this.parentId);
   }
 
   /**

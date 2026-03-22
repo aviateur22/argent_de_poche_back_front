@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, CreateChildAccountDto, CreatedChildAccountIdDto, DesactivateChildAccountDto, DisplayChildAccountInfoDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
+import { AddMoneyMovementDto, ChildAccountDto, ChildAccountIdDto, CreateChildAccountDto, CreatedChildAccountIdDto, DesactivateChildAccountDto, DisplayChildAccountInfoDto, ReinitializeRemainingMoneyDto, StreamChildAccountImageDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from '../models/child-money.dto';
 import { HttpClient } from '@angular/common/http';
 import apiUrl from '../../misc/api-url';
 
@@ -38,11 +38,19 @@ export class ChildMoneyAccountService {
     return this._http.get<ChildAccountDto>(url);
   }
 
-  streamChildImage(imageName: string, parentId: string, childAccountId: string): Observable<Blob> {
+  /**
+   * Stream de l'image d'un compte d'argent de poche
+   *
+   * @param imageName
+   * @param parentId
+   * @param childAccountId
+   * @returns
+   */
+  streamChildImage(dto: StreamChildAccountImageDto): Observable<Blob> {
     let url = apiUrl.streamChildImage.url
-    .replace('{parentId}', parentId)
-    .replace('{childAccountId}', childAccountId)
-    .replace('{imageName}', imageName);
+    .replace('{parentId}', dto.parentId)
+    .replace('{childAccountId}', dto.childAccountId)
+    .replace('{imageName}', dto.imageName);
 
     return this._http.get(url) as Observable<Blob>;
   }

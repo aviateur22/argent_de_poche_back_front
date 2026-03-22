@@ -9,7 +9,7 @@
           class="image"
           alt="">
         </div>
-      } @else if(childImageUrl) {
+      } @else if(childImageUrl$ | async; as childImageUrl) {
         <!--Image selectionné-->
       <div class="image--wrapper">
         <img
@@ -20,14 +20,6 @@
           priority
           alt="">
       </div>
-      } @else {
-        <!-- Image de Chargement-->
-        <div class="image--wrapper">
-          <img
-            [src]="placeholder"
-            class="image"
-            alt="une image de chargement">
-        </div>
       }
   </div>
 

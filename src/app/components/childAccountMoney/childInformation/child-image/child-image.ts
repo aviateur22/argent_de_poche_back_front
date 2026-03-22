@@ -1,16 +1,43 @@
 import { Component, inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgOptimizedImage } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ParentService } from '../../../../services/parent.service';
+import { Observable, of } from 'rxjs';
+import { ImageService } from '../../../../services/image.service';
 
 @Component({
   selector: 'app-child-image',
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, AsyncPipe],
   templateUrl: './child-image.html',
   styleUrl: './child-image.css',
 })
-export class ChildImage {
-  // L'url d'acces a l'image du compte d'argent de poche
-  @Input() childImageUrl!: string;
+export class ChildImage implements OnChanges {
 
-  // L'image de chargement
-  placeholder = "/images/cbasic60.svg";
+  private _activateRoute = inject(ActivatedRoute);
+  private _parentService = inject(ParentService);
+  private _imageService = inject(ImageService);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadChildImage();
+  }
+
+  // Le nom de l'image du compte
+  @Input() childImageName!: string;
+
+  // L'image du compte qui sera chargé
+  childImage$: Observable<string> = of('');
+
+  /**
+   * Chargement de l'url de l'image du compte
+   */
+  loadChildImage(): void {
+    const childAccountId = this._activateRoute.snapshot.paramMap.get('childAccountId');
+    const parentId = this._parentService.getParentId();
+
+    // Si pas de données sur l'image
+    if(!this.childImageName || !childAccountId)
+      return;
+
+    this.childImage$ = this._imageService.loadChildImageUrl(this.childImageName, childAccountId, parentId);
+  }
 }

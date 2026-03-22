@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { FlashMessage } from "./model";
-import { AddMoneyMovementDto, ChildAccountDto, CreateChildAccountDto, DesactivateChildAccountDto, DisplayChildAccountInfoDto, ReinitializeRemainingMoneyDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from "../models/child-money.dto";
+import { AddMoneyMovementDto, ChildAccountDto, CreateChildAccountDto, DesactivateChildAccountDto, DisplayChildAccountInfoDto, ReinitializeRemainingMoneyDto, StreamChildAccountImageDto, UpdatedChildNameDto, UpdatedIntialMoneyDto } from "../models/child-money.dto";
 import { CreateFamilyAccountDto, FamilyAccountDto, FamilyChildAccountDto, LoadFamilyAccountDto } from "../models/family-account.dto";
 import { LoginDto, LoginResponseDto } from "../models/auth.dto";
 
@@ -20,6 +20,10 @@ export const loadChildAccountSuccessAction = createAction("[loadChildAccountSucc
 export const loadChildAccountFailedAction = createAction("[loadChildAccountFailedAction] load Child Account Failed Action");
 
 export const resetChildAccountAction = createAction("[resetChildAccountAction] resetChildAccountAction");
+
+export const streamChildAccountImageAction = createAction("[streamChildAccountImageAction] streamChildAccountImageAction", props<{ dto: StreamChildAccountImageDto }>());
+export const streamChildAccountImageSuccessAction = createAction("[streamChildAccountImageSuccessAction] streamChildAccountImageSuccessAction");
+export const streamChildAccountImageFailedAction = createAction("[streamChildAccountImageFailedAction] streamChildAccountImageFailedAction");
 
 export const refreshChildAccountAction = createAction("[refreshChildAccountAction] refresh Child AccountAction", props<{ parentId: string, childAccountId: string }>());
 export const refreshChildAccountSuccessAction = createAction("[refresh Child Account Success Action] refreshChildAccountSuccessAction", props<{ childAccountMoneyDto: ChildAccountDto }>());
